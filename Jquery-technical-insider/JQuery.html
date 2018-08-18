@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQuery</title>
+</head>
+<body>
+<script type="text/javascript">
+	var JQuery = function(window,undefined){
+		var JQurey = function(){
+			return new JQuery.fn.init();
+		}
+	JQuery.fn = JQuery.prototype = {
+		init : function(){
+
+		},
+		extend : function(){
+
+		}
+
+	}
+	JQuery.fn.init.prototype = JQuery.fn;
+	return JQuery;
+	}(window);
+</script>
+	
+</body>
+</html>

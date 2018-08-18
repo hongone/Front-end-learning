@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		var person = {
+			ctip : function(tip){
+				this.tip = tip ; 
+				return this;
+			},
+			ctag : function(tag){
+				if(this.tag){
+					this.tag = this.tag + tag; 
+				}else{
+					this.tag = tag; 
+				}
+				
+				return this;
+			}
+		}
+		person.ctip("the tip").ctag("the tag");
+		console.log(person);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

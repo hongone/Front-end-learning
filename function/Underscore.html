@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Underscore</title>
+	<script src="./Underscore.js"></script>
+	<script>
+	var arr = [10, 20, 30];  
+	var arrobj= _(arr);
+	console.log(arrobj.value() ) ; 
+	console.log(_(arr).chain().first().value() ) ; 
+
+	console.log(_(arr).chain().map(function(item){ return ++item; }).first().value() ) ; 
+	console.log(arrobj.map(function(item){ 
+		return ++item; 
+	}));
+
+	console.log(arrobj.value() ) ; 
+	/*    .chain()  
+	    .map(function(item){ return item++; })  
+	    .first()  
+	    .value() */
+		//console.log(_.);
+	console.log(_.first([5, 4, 3, 2, 1])) ; 
+	
+	</script>
+</head>
+
+<body>
+	
+</body>
+</html>

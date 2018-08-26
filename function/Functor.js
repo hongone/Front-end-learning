@@ -95,6 +95,24 @@ Ap.of(addTwo).map(Functor.of(2));
 // 4. IO负责了调用链积累了很多很多不纯的操作，带来的复杂性和不可维
 // 护性
 
+import _ from 'lodash';
+var compose = _.flowRight;
+var IO = function(f) {
+	this.__value = f;
+}
+IO.of = x => new IO(_ => x);
+IO.prototype.map = function(f) {
+	return new IO(compose(f, this.__value))
+};
+
+import _ from 'lodash';
+var compose = _.flowRight;
+class IO extends Monad{
+	map(f){
+		return IO.of(compose(f, this.__value))
+	}
+}
+
 // Monad 函子的作用是，总是返回
 // 一个单层的函子。它有一个
 // flatMap方法，与map方法作用相

@@ -21,7 +21,7 @@ var PraiseButton = function () {
 
 		this.isPraised = false;
 		if (typeof isPraised == 'boolean') {
-			this.praised = isPraised;
+			this.isPraised = isPraised;
 		}
 
 		if (this.isPraised && this.val == 0) {
@@ -63,7 +63,7 @@ var Thumb = function (_PraiseButton) {
 
 			var that = this;
 			return function (el) {
-				var currentClass = that.praised ? that.defCSSClass : '';
+				var currentClass = that.isPraised ? that.defCSSClass : '';
 				$(el).append('<dd ><span class="thumb" title="赞" >b（￣▽￣）d</span><span class="subinfo ' + currentClass + '">' + that.val + '</span></dd>');
 				$(el).find(".thumb").on("click", that.press.bind(that));
 			};

@@ -39,15 +39,15 @@ SystemJS.import('/js/jquery-1.11.1.min.js').then(function () {
   	SystemJS.import('/js/index.c.js').then(function () {
   		console.log(2);
   		$('#dl1').thumb({     
-        praised : false,
+        isPraised : false,
 		subinfo : 1000});
 		
   		$('#dl2').thumb({     
-        praised : true,
+		isPraised : true,
 		subinfo : 250});
 
 		$('#dl3').thumb({     
-        praised : true,
+		isPraised : true,
 		subinfo : 1});
 
 		$('#dl4').thumb();

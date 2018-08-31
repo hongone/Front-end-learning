@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES6toES5 Systemjs  jquery.extend</title>
+	<style>
+		dl {
+			width: 400px;
+			min-height: 80px;
+			border: 1px solid #e5e5e5; 
+			position: relative;
+		}
+		dd {
+			min-width: 150px;
+			position: absolute;
+			right: 0px;
+			bottom: 0px;
+			color:#808080;
+		}
+		.thumb{
+			cursor: pointer;
+			padding: 0px 20px 0px 0px;  
+		}
+		.praised{
+			color:#bb3e3e; 
+		}
+		.unPraised{
+			color:#808080;  
+		}
+	</style>
+	<script src="./js/system.js"></script>
+	<script>
+var config={
+	"baseURL":"./"
+};
+SystemJS.config(config);
+
+SystemJS.import('/js/jquery-1.11.1.min.js').then(function () {
+  	SystemJS.import('/js/index.c.js').then(function () {
+  		console.log(2);
+  		$('#dl1').thumb({     
+        praised : false,
+		subinfo : 1000});
+		
+  		$('#dl2').thumb({     
+        praised : true,
+		subinfo : 250});
+
+		$('#dl3').thumb({     
+        praised : true,
+		subinfo : 1});
+
+		$('#dl4').thumb();
+	});
+});
+  
+	</script>
+</head>
+<body>
+	<article>
+		<h1>微博</h1>
+		<dl id="dl1"> 
+    		<dt >标题1</dt>
+    		
+		</dl>
+		<dl id="dl2"> 
+    		<dt >标题2</dt>
+    		
+		</dl> 
+		<dl id="dl3"> 
+    		<dt >标题3</dt>
+    		
+		</dl> 
+		<dl id="dl4"> 
+    		<dt >标题4</dt>
+    		
+		</dl>  
+		
+	
+	</article>
+	
+</body>
+</html>

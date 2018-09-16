@@ -10,7 +10,7 @@ class PraiseButton {
 		$('#animation').addClass('num');
 		this.num = add(this.num);
 		setTimeout(() => { $('#animation').removeClass('num') }, 1000);
-
+		console.log(this);
 	}
 }
 class Thumb extends PraiseButton {
@@ -30,6 +30,7 @@ class Thumb extends PraiseButton {
 				this.el.css('-webkit-filter', 'grayscale(1)');
 				this.num = 0;
 			}
+			//console.log(this);
 
 
 		});

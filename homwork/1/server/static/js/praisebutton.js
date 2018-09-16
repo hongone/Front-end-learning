@@ -32,6 +32,7 @@ var PraiseButton = function () {
 			setTimeout(function () {
 				$('#animation').removeClass('num');
 			}, 1000);
+			console.log(this);
 		}
 	}]);
 
@@ -66,6 +67,8 @@ var Thumb = function (_PraiseButton) {
 					_this2.el.css('-webkit-filter', 'grayscale(1)');
 					_this2.num = 0;
 				}
+				//console.log(this);
+
 			});
 		}
 	}]);

@@ -1,3 +1,3 @@
 window.add = function(num){
-    return num++;
+    return num=num+1;
 }

@@ -15,17 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {
-        pattern: './Server/static/*.html',
-        watched: true,
-        included: false,
-        served: true
-      },
-      './Server/static/js/jquery-1.11.1.min.js',
-      'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
-      'bower_components/jasmine-ajax/lib/mock-ajax.js',
-      "./src/*.js",
-      "./test/*.spec.js"
+      "./src/**/*.js",
+      "./test/**/*.spec.js"
     ],
 
 

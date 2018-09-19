@@ -1,0 +1,73 @@
+{% extends './layout.html' %}
+{% block title %} koa2 {% endblock %}
+{% block style %}
+<style>
+    .num {
+        display: block !important;
+        -webkit-animation: neon2 1.5s ease-in-out alternate;
+        animation: neon2 1.5s ease-in-out alternate;
+        /*语法 animation: name duration timing-function delay iteration-count direction;*/
+        -webkit-animation-iteration-count: 1;
+        /*该属性定义动画的播放次数为1。*/
+        /* Safari 和 Chrome */
+        font-size: 150px;
+        color: #FF1177;
+        position: absolute;
+        right: 10%;
+        top: 10%;
+    }
+    @-webkit-keyframes neon2 {
+        from {
+            opacity: 0;
+            -webkit-transform: translateY(-30px);
+        
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+        }
+
+        to {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+        }
+    }
+    .hide{
+        display: none;
+    }
+    #showzone{
+        position: relative;
+    }
+    article{
+        width: 400px;
+    }
+</style>
+{% endblock  %}
+{% block script %} 
+<script>
+    SystemJS.import('jquery.min.js').then(function () {
+        SystemJS.import('praisebutton.js').then(function (m) {		
+        $.extend({
+            thumb:m.default
+        });
+        SystemJS.import('index.js').then(function (m) {		
+            m.default();
+        });
+    });
+
+    });
+</script>
+{% endblock  %}
+{% block content %}
+<article>
+    <h1>点赞</h1>
+    <dl id="dl1"> 
+        
+        <dt id="showzone"><img id="thumb" src="/img/thumb.jpeg" />
+            <span class="hide" id="animation">+1</span>
+        </dt>
+    </dl>
+    
+    
+
+</article>
+{% endblock %}

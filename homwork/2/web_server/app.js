@@ -42,5 +42,5 @@ app.on('error', (err, ctx) => {
 });
 
 http.createServer(app.callback()).listen(9000);
-https.createServer(app.callback()).listen(9001);
-console.log('服务已运行...')
+//https.createServer(app.callback()).listen(9001);
+console.log('服务已运行在端口' + 9000);

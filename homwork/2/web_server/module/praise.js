@@ -3,7 +3,7 @@ const rp=require('request-promise');
 const pastPraise = () =>{
     
     let options = {
-        method: 'POST',
+        method: 'GET',
         uri: 'http://127.0.0.1:8000/praise',
         json: true // Automatically stringifies the body to JSON
     };

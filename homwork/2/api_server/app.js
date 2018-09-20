@@ -23,6 +23,15 @@ const server=Hapi.server({
 for (let api of routes) {
     server.route(api);
 }
+server.route({
+    method: 'GET',
+    path: '/*',
+    handler: function (request, h) {
+        console.log(request.info);
+
+    }
+});
+
 
 // Start the server
 const init = async () => {

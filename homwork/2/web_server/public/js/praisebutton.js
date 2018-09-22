@@ -12,32 +12,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PraiseButton = function () {
-	function PraiseButton(num) {
-		_classCallCheck(this, PraiseButton);
+var PraiseButton = function PraiseButton(num) {
+	_classCallCheck(this, PraiseButton);
 
-		this.num = 0;
-		if (num && typeof num == 'number' && num >= 0) {
-			this.num = num;
-		}
+	this.num = 0;
+	if (num && typeof num == 'number' && num >= 0) {
+		this.num = num;
 	}
-	//显示数字动画效果
-
-
-	_createClass(PraiseButton, [{
-		key: 'showNum',
-		value: function showNum() {
-			$('#animation').addClass('num');
-			this.num = add(this.num);
-			setTimeout(function () {
-				$('#animation').removeClass('num');
-			}, 1000);
-			console.log(this);
-		}
-	}]);
-
-	return PraiseButton;
-}();
+};
 
 var Thumb = function (_PraiseButton) {
 	_inherits(Thumb, _PraiseButton);
@@ -59,17 +41,64 @@ var Thumb = function (_PraiseButton) {
 		value: function clickAction() {
 			var _this2 = this;
 
-			this.el.click(function () {
-				if (_this2.num < 10) {
-					_this2.el.css('-webkit-filter', 'grayscale(0)');
-					_this2.showNum();
-				} else {
-					_this2.el.css('-webkit-filter', 'grayscale(1)');
-					_this2.num = 0;
-				}
-				//console.log(this);
+			// this.el.click(() => {
+			// 	if (this.num < 10) {
+			// 		this.el.css('-webkit-filter', 'grayscale(0)');
+			// 		this.showAnim();
 
+			// 	} else {
+			// 		this.el.css('-webkit-filter', 'grayscale(1)');
+			// 		this.num = 0;
+			// 	}
+			// 	//console.log(this);
+
+
+			// });
+			this.el.click(function () {
+				_this2.throttle(_this2.buttonclick, _this2);
 			});
+		}
+	}, {
+		key: 'buttonclick',
+		value: function buttonclick() {
+			if (this.num < 10) {
+				this.el.css('-webkit-filter', 'grayscale(0)');
+				this.showAnim();
+			} else {
+				this.el.css('-webkit-filter', 'grayscale(1)');
+				this.num = 0;
+			}
+			//console.log(this);
+		}
+	}, {
+		key: 'update',
+		value: function update() {
+			axios.get('/index/praise').then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+		//显示数字动画效果
+
+	}, {
+		key: 'showAnim',
+		value: function showAnim() {
+			$('#animation').addClass('num');
+			this.num = add(this.num);
+			setTimeout(function () {
+				$('#animation').removeClass('num');
+			}, 1000);
+			console.log(this);
+			this.update();
+		}
+	}, {
+		key: 'throttle',
+		value: function throttle(method, context) {
+			clearTimeout(method.tId);
+			method.tId = setTimeout(function () {
+				method.call(context);
+			}, 800);
 		}
 	}]);
 

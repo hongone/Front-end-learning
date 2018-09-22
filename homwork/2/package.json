@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "apitest": "mocha ./web_server/test/api.js",
+    "e2e": "node ./web_server/test/e2e.js",
+    "unittest": "karma start"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +21,25 @@
     "koa-simple-router": "^0.2.0",
     "koa-static": "^5.0.0",
     "koa-swig": "^2.2.1",
+    "log4js": "^3.0.5",
     "mysql": "github:mysqljs/mysql",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
+    "jasmine-core": "^3.2.1",
+    "karma": "^3.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^1.1.2",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "mocha": "^5.2.0",
+    "mocha-cli": "^1.0.1",
+    "phantom": "^6.0.3",
+    "selenium-webdriver": "^4.0.0-alpha.1",
+    "supertest": "^3.3.0"
+  }
 }

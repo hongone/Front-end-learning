@@ -1,4 +1,5 @@
 const config = new Map();
+config.set('svhostname','API');
 config.set('svhost','localhost');
 config.set('svport','8000');
 config.set('dbhost','localhost');

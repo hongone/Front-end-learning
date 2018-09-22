@@ -2,7 +2,7 @@ const Praise = require('../module/praise');
 const config = require('../config/');
 const praise = {
     method: 'GET',
-    path: '/praise',
+    path: '/praise/add',
     handler: function (request, h) {
         const pr = new Praise(config);
 

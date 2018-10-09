@@ -1,0 +1,19 @@
+{
+  "name": "api_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-mysql": "^1.0.1",
+    "hapi": "^17.5.4",
+    "log4js": "^3.0.5",
+    "mysql": "github:mysqljs/mysql"
+  },
+  "devDependencies": {}
+}

@@ -18,6 +18,7 @@ module.exports={
                 loader : 'babel-loader',
                 options :{
                    // 'presets' : ['es2015','stage-0']
+                   //module:false就不会对es6的语法（诸如:import）进行转换了
                    'presets' : [['es2015',{'modules': false}],'stage-0']
                 }
             }]

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock  %}</title>
+  
+    {% block style %}
+
+    {% endblock  %}  
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <!-- <script src="/js/axios.min.js"></script> -->
+   
+    
+    
+	
+    {% block script %}
+
+    {% endblock  %}
+
+</head>
+<body>
+    {% block content %}{% endblock  %}
+</body>
+</html>

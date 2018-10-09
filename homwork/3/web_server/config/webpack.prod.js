@@ -14,7 +14,7 @@ module.exports = {
     tag: [path.join(__dirname, '../src/public/js/xtag.es6')]
   },
   output: {
-    path: path.join(__dirname, '../dist/'),
+    path: path.join(__dirname, '../build/'),
     publicPath: './', // 在全部的资源引用前面加路径
     filename: 'public/js/[name]-[hash:5].js'
   },

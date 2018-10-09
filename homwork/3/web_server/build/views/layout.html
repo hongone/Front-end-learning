@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock  %}</title>
+  
+    {% block style %}
+
+    {% endblock  %}  
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <!-- <script src="/js/axios.min.js"></script> -->
+   
+    
+    
+	
+    {% block script %}
+
+    {% endblock  %}
+
+<link href="./public/css/index-fadb7.css" rel="stylesheet"></head>
+<body>
+    {% block content %}{% endblock  %}
+<script type="text/javascript" src="./public/js/common/vendor-fadb7.min.js"></script><script type="text/javascript" src="./public/js/index-fadb7.js"></script><script type="text/javascript" src="./public/js/tag-fadb7.js"></script></body>
+</html>

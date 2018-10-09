@@ -1,1 +1,1 @@
-supervisor ./web_server/bin/www.js
+supervisor ./web_server/build/bin/www.js

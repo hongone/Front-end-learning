@@ -12,5 +12,5 @@ gulp.task('praise', ()=>{
     .pipe(babel({
         presets: ['env']
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./build'));
 });

@@ -15,7 +15,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../build/'),
-    publicPath: './', // 在全部的资源引用前面加路径
+    publicPath: '/', // 在全部的资源引用前面加路径
     filename: 'public/js/[name]-[hash:5].js'
   },
   module: {

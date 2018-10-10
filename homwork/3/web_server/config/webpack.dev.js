@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../build/'),
-    publicPath: './', // 在全部的资源引用前面加路径
+    publicPath: '/', // 在全部的资源引用前面加路径
     filename: 'public/js/[name]-[hash:5].js'
   },
   module: {
@@ -55,15 +55,22 @@ module.exports = {
       filename: 'public/js/common/vendor-[hash:5].min.js',
      // minChunks: 2 // 最少两次引用相同的js代码
     }),
+  
     new HtmlWebpackPlugin({
-      filename : './views/layout.html', //以output的目录为基准
-      template : 'src/views/layout.html',
-      inject :true
+      filename:'./views/layout.html',//以output的目录为基准
+      template:'src/widget/layout.html',
+      inject:false
+    }),
+      new HtmlWebpackPlugin({
+        filename:'./views/index.html',
+        template:'src/views/index.js',
+        inject:false,
+        chunks:['vendor','index','tag']
     }),
     new HtmlWebpackPlugin({
-      filename : './views/index.html', //以output的目录为基准
-      template : 'src/views/index.html',
-      inject :false
+        filename:'./widget/index.html',
+        template:'src/widget/index.html',
+        inject:false
     })
    
   ]

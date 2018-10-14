@@ -1,0 +1,14 @@
+const {Builder, By, Key, until} = require('selenium-webdriver');
+
+(async function example() {
+  let driver = await new Builder().forBrowser('firefox').build();
+  try {
+    await driver.get('http://127.0.0.1:9000/index/index/');
+  //  await driver.findElement(By.id('kw')).sendKeys('webdriver', Key.RETURN);
+    await driver.findElement(By.id('thumb')).click();
+    const _animation = driver.findElement(By.id('animation'));
+    await driver.wait(_animation.isDisplayed(), 1000);
+  } finally {
+    await driver.quit();
+  }
+})();

@@ -1,8 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
- const ExtractTextPlugin = require('extract-text-webpack-plugin');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Manifest= require('webpack-manifest');
+//const pkg =require('./package');
 module.exports = {
   entry: {
     // 合成文件

@@ -11,6 +11,7 @@ var initController = {
             _.get('/index/post', routers.post());
             _.get('/index/praise', routers.praise());
             _.get('/index/star', routers.star());
+            _.get('/index/adv', routers.adv());
         }));
     }
 };

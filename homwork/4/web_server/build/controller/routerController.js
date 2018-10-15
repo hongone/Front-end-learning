@@ -10,6 +10,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var router = require('koa-simple-router');
 var Praise = require('../module/praise');
+var md5 = require("md5");
 var routers = {
     index: function index() {
         var _this = this;
@@ -148,6 +149,37 @@ var routers = {
 
             return function (_x7, _x8) {
                 return _ref4.apply(this, arguments);
+            };
+        }();
+    },
+    adv: function adv() {
+        var _this5 = this;
+
+        return function () {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee5(ctx, next) {
+                var content, encodestr;
+                return _regenerator2.default.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                content = '<div style="width:100%;height:50px;background-color:yellowgreen">我的广告</div>';
+                                encodestr = md5(content);
+                                //    ctx.body = content;
+
+                                ctx.set('encode-md5', encodestr);
+
+                                ctx.body = content;
+
+                            case 4:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, _this5);
+            }));
+
+            return function (_x9, _x10) {
+                return _ref5.apply(this, arguments);
             };
         }();
     }

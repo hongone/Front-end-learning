@@ -11,10 +11,16 @@ module.exports = function(templateParams, cssList) {
    var _regCss = cssList;
    var _scripts = "";
    var _styles = "";
+   var _scriptname = [];
    var _scriptshow = [];
+   var _scripthash = [];
+   console.log("_files");
+   console.log(_files);
    for (var i = 0; i < _regChunk.length; i++) {
        _scripts += "<script type='text/javascript'  src='" + _files.chunks[_regChunk[i]]['entry'] + "'></script>";
-       _scriptshow.push( "'" +  _files.chunks[_regChunk[i]]['entry'] + "'");
+       _scriptshow.push( "{'name' : '" +  _regChunk[i] + "','path':'" + _files.chunks[_regChunk[i]]['entry'] + "','hash':'" +  _files.chunks[_regChunk[i]]['hash'] + "'}");
+     //  _scriptshow.push( "'" +  _files.chunks[_regChunk[i]]['entry'] + "'");
+     //  _scripthash.push( "'" +  _files.chunks[_regChunk[i]]['hash'] + "'");
    }
    for (var k = 0; k < _regCss.length; k++) {
        var _cssitem = _regCss[k],
@@ -28,11 +34,13 @@ module.exports = function(templateParams, cssList) {
            }
        });
    }
-   _scripts = _scripts.replace(/src=\'\/public\//g,'src=\'/');   
-   _styles = _styles.replace(/href="\/public\//g,'href="/');
+  
+ //  _scripts = _scripts.replace(/src=\'\/public\//g,'src=\'/');   
+ //  _styles = _styles.replace(/href="\/public\//g,'href="/');
    return {
        scripts: _scripts,
-       styles: _styles,
+       styles: _styles,  
        scriptshow : _scriptshow
+     
    }
 }

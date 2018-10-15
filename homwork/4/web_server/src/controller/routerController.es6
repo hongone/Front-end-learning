@@ -1,5 +1,6 @@
 const router = require('koa-simple-router');
 const Praise = require('../module/praise');
+const md5=require("md5")
 const routers ={
     index(){
         return async (ctx, next) => {
@@ -39,6 +40,19 @@ const routers ={
             }else{
                 ctx.body = await ctx.render('star',{title : "星星点赞"});
             }
+        }
+
+    },
+    adv(){
+        return async (ctx, next) => {       
+            let content = '<div style="width:100%;height:50px;background-color:yellowgreen">我的广告</div>';
+            let encodestr=md5(content);
+        //    ctx.body = content;
+            ctx.set('encode-md5', encodestr);
+
+            ctx.body = content;
+            
+            
         }
 
     }

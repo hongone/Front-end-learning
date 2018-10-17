@@ -1,5 +1,5 @@
 require('../styles/index.less');
-
+require('../img/thumb.jpeg');
 
 import {data} from './data.es6';
 //const data =123;

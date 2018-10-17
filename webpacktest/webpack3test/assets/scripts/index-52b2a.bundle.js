@@ -1,0 +1,1 @@
+webpackJsonp([1],[function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var o=new Map;o.set("data","Index init");var a=o.get("data");t(1),t(2),console.log(a),t.e(0).then(t.bind(null,3)).then(function(e){e.default()})},function(e,n){},function(e,n,t){e.exports=t.p+"img/thumb.jpeg"}],[0]);

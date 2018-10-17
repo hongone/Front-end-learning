@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports={
     entry :{
-        'index' : './assets/scripts/index.es6'
+        'index' : './src/scripts/index.es6'
     },
     output :{
         path : path.join(__dirname,'./assets/'), 
@@ -22,14 +22,26 @@ module.exports={
                    'presets' : [['es2015',{'modules': false}],'stage-0']
                 }
             }]
-        },{
+        },
+        {
             test :/\.less$/i,
             //use : [{}]
             use : ExtractTextPlugin.extract({
                 fallback : 'style-loader',
                 use :[{loader : 'css-loader'},
                     {loader : 'less-loader'}]
+     
+			
             })
+        },
+        {
+            test: /\.(png|svg|jpg|gif|jpeg)$/,
+            use: [{
+                loader :'file-loader',
+                options: {
+                    name: 'img/[name].[ext]'
+                  }
+        }]
         }]
     },
     plugins :[
@@ -52,7 +64,7 @@ module.exports={
         new webpack.optimize.ModuleConcatenationPlugin(),
         new HtmlWebpackPlugin({
             filename : 'index.html', //以output的目录为基准
-            template : './index.html',
+            template : './src/index.html',
             inject :true
         })
     ]

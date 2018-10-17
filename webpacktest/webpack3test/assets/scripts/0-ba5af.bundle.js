@@ -1,1 +1,0 @@
-webpackJsonp([0],{2:function(e,n,o){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var c=function(){console.log("async res")};n.default=c}});

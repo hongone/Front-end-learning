@@ -1,1 +1,0 @@
-webpackJsonp([1],[function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var a=new Map;a.set("data","Index init");var o=a.get("data");t(1),console.log(o),t.e(0).then(t.bind(null,2)).then(function(e){e.default()})},function(e,n){}],[0]);

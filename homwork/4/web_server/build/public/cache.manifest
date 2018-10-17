@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# Time: Wed Oct 17 2018 21:58:23 GMT+0800 (CST)
+# praisebutton4 
+
+CACHE:
+css/vendor.css
+index/index
+index/praise
+index/star
+
+NETWORK:
+ index/post

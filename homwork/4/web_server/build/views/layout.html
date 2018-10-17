@@ -33,7 +33,7 @@
     localforage.getItem('myAdvertisement',function(err,value){
         if(value==null){
             $.get('/index/adv', function(data, textStatus, jqXHR){
-                alert(jqXHR.getResponseHeader("encode-md5"));
+              //  alert(jqXHR.getResponseHeader("encode-md5"));
                 localforage.setItem('myAdvertisement',data);
                 $('body').prepend(data);
        

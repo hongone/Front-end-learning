@@ -1,0 +1,44 @@
+{
+  "name": "web_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "webpackdev": "better-npm-run webpack:dev",
+    "webpackprod": "better-npm-run webpack:prod",
+    "webpackwatch": "webpack -w",
+    "apitest": "mocha ./web_server/test/api.js",
+    "e2e": "node ./web_server/test/e2e.js",
+    "unittest": "karma start"
+  },
+  "betterScripts": {
+    "webpack:dev": {
+      "command": "webpack --progress --colors",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    },
+    "webpack:prod": {
+      "command": "webpack --progress --colors",
+      "env": {
+        "NODE_ENV": "prod"
+      }
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "co": "^4.6.0",
+    "koa": "^2.5.3",
+    "koa-simple-router": "^0.2.0",
+    "koa-static": "^5.0.0"
+
+  },
+  "devDependencies": {
+    
+  }
+}

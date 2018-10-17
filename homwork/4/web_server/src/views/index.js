@@ -2,7 +2,7 @@ module.exports=function (templateParams) {
 	var _cssList=['vendor'];
     var webAssetsHelp=require('./webAssetsHelp.js')(templateParams,_cssList);
     var scriptshow = '' + webAssetsHelp.scriptshow;
-    scriptshow = scriptshow.replace(/'\/public\//g,'\'/')  
+    scriptshow = scriptshow.replace(/\/public\//g,'/')  
    // console.log(scriptshow);
     var localStorage = '<script type=\'text/javascript\' >' +
     '    (function(window){' +
@@ -35,7 +35,7 @@ module.exports=function (templateParams) {
 	var _html="{% extends './layout.html' %}"+
               "{% block title %}thumb{% endblock %}"+
               "{% block styles %}"+
-              webAssetsHelp.styles.replace(/href="\/public\//g,'href="/')+
+              webAssetsHelp.styles.replace(/\/public\//g,'/')+
               "{% endblock %}"+
               "{% block content %}{% include '../widget/index.html' %}{% endblock %}"+
               "{% block script %}"+

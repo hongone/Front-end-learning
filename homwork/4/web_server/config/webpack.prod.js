@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
- const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const Manifest= require('webpack-manifest');
+
 module.exports = {
   entry: {
     // 合成文件
@@ -15,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../build/'),
-    publicPath: '/', // 在全部的资源引用前面加路径
+    publicPath: 'http://127.0.0.1:8888/', // 在全部的资源引用前面加路径
     filename: 'public/javascript/[name]-[hash:5].js'
   },
   module: {
@@ -69,6 +71,41 @@ module.exports = {
         preset: ['default', { discardComments: { removeAll: true } }],
       },
       canPrint: true
+    }),
+    
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'public/javascript/common/vendor-[hash:5].min.js',
+     // minChunks: 2 // 最少两次引用相同的js代码
+    }),
+  
+    new HtmlWebpackPlugin({
+      filename:'./views/layout.html',//以output的目录为基准
+      template:'src/widget/layout.html',
+      inject:false
+    }),
+      new HtmlWebpackPlugin({
+        filename:'./views/index.html',
+        template:'src/views/index.js',
+        inject:false,
+        chunks:['vendor','index','tag']
+    }),
+    new HtmlWebpackPlugin({
+        filename:'./widget/index.html',
+        template:'src/widget/index.html',
+        inject:false
+    }),
+
+      new HtmlWebpackPlugin({
+        filename:'./views/star.html',
+        template:'src/views/star.js',
+        inject:false,
+        chunks:['vendor','index','tag']
+    }),
+    new HtmlWebpackPlugin({
+        filename:'./widget/star.html',
+        template:'src/widget/star.html',
+        inject:false
     })
   ]
   

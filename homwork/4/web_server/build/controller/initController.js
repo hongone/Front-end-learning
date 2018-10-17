@@ -5,6 +5,7 @@ var svstatic = require('koa-static');
 var routers = require('./routerController');
 var initController = {
     init: function init(app, config) {
+
         app.use(svstatic(config.get('publicdir')));
         app.use(router(function (_) {
             _.get('/index/index', routers.index());

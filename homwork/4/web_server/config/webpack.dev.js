@@ -54,7 +54,8 @@ module.exports = {
     }),
     new LiveReloadPlugin({ appendScriptTag: true }),
     //输出css
-    new ExtractTextPlugin('public/css/[name]-[hash:5].css'),
+   // new ExtractTextPlugin('public/css/[name]-[hash:5].css'),
+   new ExtractTextPlugin('public/css/[name].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'public/javascript/common/vendor-[hash:5].min.js',
@@ -88,7 +89,31 @@ module.exports = {
         filename:'./widget/star.html',
         template:'src/widget/star.html',
         inject:false
-    })
+    }),
+    new Manifest({
+      cache: [
+    
+        'css/vendor.css',
+        'index/index',
+        'index/praise',
+        'index/star'
+     
+      ],
+      //Add time in comments.
+      timestamp: true,
+      // 生成的文件名字，选填
+      // The generated file name, optional.
+      filename:'./public/cache.manifest', 
+      // 注意*星号前面用空格隔开
+      network: [
+        ' index/post'
+      ],
+      
+      // manifest 文件中添加注释
+      // Add notes to manifest file.
+      headcomment: "praisebutton4 " , 
+      master: ['./views/layout.html']
+  })
    
   ]
   

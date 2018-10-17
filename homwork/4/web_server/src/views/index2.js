@@ -9,7 +9,7 @@ module.exports=function (templateParams) {
     '        var scriptShow=[' + scriptshow + '];' +
     '        var storage=window.localStorage;' +
     '        if(storage){' +
-   
+    '            let flag = false;' +
     '            for(let i = 0; i < scriptShow.length; i++){' +
     '                let name = scriptShow[i].name;' +
     '                let hash = scriptShow[i].hash;' +
@@ -18,14 +18,28 @@ module.exports=function (templateParams) {
     '                  let script = storage.getItem(hash);' +
     '                  $("<scr" + "ipt >" + script + "</scr" + "ipt >" ).attr({"type":"text/javascript","id" : i}).appendTo("body").remove("#" + i);' +
     '                }else{' +
-    '                  let path = scriptShow[i].path;' +
-    '                  $.get(path, function(data){' +
-    '                        storage.setItem(name,hash);' +
-    '                        storage.setItem(hash,data);' +
-    '                        $("<scr" + "ipt >"  + data + "</scr" + "ipt >" ).attr({"type":"text/javascript","id" : i}).appendTo("body").remove("#" + i);' +
-    '                    },"text");' +
+    '                   flag= true;break; ' +
     '                }' +
     '            }' +
+    '            if(flag){' + 
+    '               storage.clear();  ' +
+    '               for(let i = 0; i < scriptShow.length; i++){' +
+    '                 let name = scriptShow[i].name;' +
+    '                 let hash = scriptShow[i].hash;' +
+    '                 let path = scriptShow[i].path; ' +
+    '                 axios.get(path).' +
+    '                 then(function(data){' + 
+    '                        storage.setItem(name,hash);' +
+    '                        storage.setItem(hash,data.data);' +
+   // '                        $("<scr" + "ipt >"  + data.data + "</scr" + "ipt >" ).attr({"type":"text/javascript","id" : i}).appendTo("body").remove("#" + i);' +
+    '                       ' +
+    '                 });' +  
+    '               }' +
+    '             }' +
+    '         LazyLoad.js(scriptShow.map(v => v.path), function (arg) {  console.log(arg);});' +
+ 
+    '        }else{' +
+    '                ' +
     '        }' +
     '    })(window); ' +
     ' </script>';
@@ -35,7 +49,7 @@ module.exports=function (templateParams) {
               "{% block styles %}"+
               webAssetsHelp.styles.replace(/\/public\//g,'/')+
               "{% endblock %}"+
-              "{% block content %}{% include '../widget/star.html' %}{% endblock %}"+
+              "{% block content %}{% include '../widget/index.html' %}{% endblock %}"+
               "{% block script %}"+
             //  webAssetsHelp.scripts.replace(/src=\'\/public\//g,'src=\'/')+
               localStorage +

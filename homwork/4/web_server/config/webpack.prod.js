@@ -13,7 +13,10 @@ module.exports = {
       path.join(__dirname, '../src/public/javascript/praisebutton.es6'),
       path.join(__dirname, '../src/public/javascript/utilty.es6')
     ],
-    tag: [path.join(__dirname, '../src/public/javascript/xtag.es6')]
+    tag: [
+      path.join(__dirname, '../src/public/javascript/xtag.es6'),
+      path.join(__dirname, '../src/public/javascript/star.es6')
+    ]
   },
   output: {
     path: path.join(__dirname, '../build/'),

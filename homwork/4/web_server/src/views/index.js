@@ -9,6 +9,7 @@ module.exports=function (templateParams) {
     '        var scriptShow=[' + scriptshow + '];' +
     '        var storage=window.localStorage;' +
     '        if(storage){' +
+   
     '            for(let i = 0; i < scriptShow.length; i++){' +
     '                let name = scriptShow[i].name;' +
     '                let hash = scriptShow[i].hash;' +
@@ -17,17 +18,14 @@ module.exports=function (templateParams) {
     '                  let script = storage.getItem(hash);' +
     '                  $("<scr" + "ipt >" + script + "</scr" + "ipt >" ).attr({"type":"text/javascript","id" : i}).appendTo("body").remove("#" + i);' +
     '                }else{' +
-    '                   let path = scriptShow[i].path;' +
-    '                    $.get(path, function(data){' +
+    '                  let path = scriptShow[i].path;' +
+    '                  $.get(path, function(data){' +
     '                        storage.setItem(name,hash);' +
     '                        storage.setItem(hash,data);' +
     '                        $("<scr" + "ipt >"  + data + "</scr" + "ipt >" ).attr({"type":"text/javascript","id" : i}).appendTo("body").remove("#" + i);' +
-    '                       ' +
     '                    },"text");' +
     '                }' +
     '            }' +
-    '        }else{' +
-    '                ' +
     '        }' +
     '    })(window); ' +
     ' </script>';

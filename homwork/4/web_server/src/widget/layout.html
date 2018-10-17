@@ -21,27 +21,38 @@
     {% block content %}{% endblock  %}
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazyload/2.0.3/lazyload-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js"></script>
 <script>
-    $(document).pjax('nav a', '#pjax-container');
-  
-    localforage.getItem('myAdvertisement',function(err,value){
-        if(value==null){
-            $.get('/index/adv', function(data, textStatus, jqXHR){
-              //  alert(jqXHR.getResponseHeader("encode-md5"));
-                localforage.setItem('myAdvertisement',data);
-                $('body').prepend(data);
-       
-            },"text");
-        }else{
-            $('body').prepend(value);
-        }
+    var cdn = [];
+  //  cdn.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js');
+    cdn.push('https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js');
+    // cdn.push('https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js');
+    cdn.push('https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js');
+    cdn.push('https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.js');
+    LazyLoad.js(cdn, function () {  
+        $(document).pjax('nav a', '#pjax-container');
+        localforage.getItem('myAdvertisement',function(err,value){
+            if(value==null){
+                $.get('/index/adv', function(data, textStatus, jqXHR){
+                    //  alert(jqXHR.getResponseHeader("encode-md5"));
+                    localforage.setItem('myAdvertisement',data);
+                    $('body').prepend(data);
+            
+                },"text");
+            }else{
+                $('body').prepend(value);
+            }
+        });
+
+
     });
+
 </script>
 {% block script %}
 

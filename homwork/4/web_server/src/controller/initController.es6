@@ -4,7 +4,6 @@ const routers = require('./routerController');
 const initController = {
     init : (app,config)=>{
 
-        
         app.use(svstatic(config.get('publicdir')));
         app.use(router(_ => {
             _.get('/index/index', routers.index());

@@ -1,10 +1,10 @@
 module.exports=function (templateParams) {
-	var _cssList=['vendor'];
+	  var _cssList=['vendor'];
     var webAssetsHelp=require('./webAssetsHelp.js')(templateParams,_cssList);
     var scriptshow = '' + webAssetsHelp.scriptshow;
-    scriptshow = scriptshow.replace(/\/public\//g,'/')  
    // console.log(scriptshow);
-    var localStorage = '<script type=\'text/javascript\' >' +
+    var localStorage = 
+    //'<script type=\'text/javascript\' >' +
     '    (function(window){' +
     '        var scriptShow=[' + scriptshow + '];' +
     '        var storage=window.localStorage;' +
@@ -27,17 +27,19 @@ module.exports=function (templateParams) {
     '                }' +
     '            }' +
     '        }' +
-    '    })(window); ' +
-    ' </script>';
+    '    })(window); '  
+    //+
+   
+    //' </script>';
    
 	var _html="{% extends './layout.html' %}"+
               "{% block title %}thumb{% endblock %}"+
               "{% block styles %}"+
-              webAssetsHelp.styles.replace(/\/public\//g,'/')+
+              webAssetsHelp.styles +
               "{% endblock %}"+
               "{% block content %}{% include '../widget/index.html' %}{% endblock %}"+
               "{% block script %}"+
-            //  webAssetsHelp.scripts.replace(/src=\'\/public\//g,'src=\'/')+
+            //  webAssetsHelp.scripts +
               localStorage +
               "{% endblock %}";
 

@@ -2,17 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-    <title>{% block title %}{% endblock  %}</title>
-  
-    {% block styles %}{% endblock  %}  
-   <link href="//cdnjs.cloudflare.com/" rel="dns-prefetch"  />
-    
-   
-    
-    
-	
+    <!-- <meta http-equiv="x-dns-prefetch-control" content="on"> -->
 
+    <title>{% block title %}{% endblock  %}</title>
+    <link href="//cdnjs.cloudflare.com/" rel="dns-prefetch"  />
+    <!-- 虚拟的CDN服务器 -->
+    <link href="//127.0.0.1" rel="dns-prefetch"  /> 
+    {% block styles %}{% endblock  %}  
 
 </head>
 <body>
@@ -22,20 +18,26 @@
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lazyload/2.0.3/lazyload-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.min.js"></script> --> 
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.min.js"></script> -->
+
 <script>
-    var cdn = [];
-  //  cdn.push('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js');
-    cdn.push('https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js');
-    // cdn.push('https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js');
-    cdn.push('https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js');
-    cdn.push('https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.js');
+    var cdn = [
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js',  
+    'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.1/localforage.min.js'
+    ];
     LazyLoad.js(cdn, function () {  
+        {% block script %}
+
+        {% endblock  %}    
+
         $(document).pjax('nav a', '#pjax-container');
         localforage.getItem('myAdvertisement',function(err,value){
             if(value==null){
@@ -54,7 +56,5 @@
     });
 
 </script>
-{% block script %}
 
-{% endblock  %}
 </html>

@@ -36,7 +36,11 @@
 article{
     width: 400px;
 }
-
+#thumb{
+    width: 371px;
+    height: 381px;
+    background-image: url(../img/thumb.jpeg);
+}
 #star-six {
     width: 0;
     height: 0;

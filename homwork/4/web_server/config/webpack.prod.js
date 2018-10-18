@@ -14,7 +14,7 @@ module.exports = {
       path.join(__dirname, '../src/public/javascript/utilty.es6')
     ],
     tag: [
-      path.join(__dirname, '../src/public/javascript/xtag.es6'),
+      path.join(__dirname, '../src/public/javascript/thumb.es6'),
       path.join(__dirname, '../src/public/javascript/star.es6')
     ]
   },
@@ -46,6 +46,18 @@ module.exports = {
           fallback: 'style-loader',
           use: [{ loader: 'css-loader' }]
         })
+      },
+      {
+        test: /\.(png|jpg|gif|jpeg)$/,
+        use: [
+          {
+            loader: 'file-loader',        
+            options: {
+              name: 'public/img/[name]-[hash:5].[ext]',
+              context: ''
+            }
+          }
+        ]
       }
     ]
   },

@@ -67,7 +67,8 @@ module.exports = {
     }),
     new LiveReloadPlugin({ appendScriptTag: true }),
     //输出css
-    new ExtractTextPlugin('public/css/[name]-[hash:5].css'),
+   // new ExtractTextPlugin('public/css/[name]-[hash:5].css'),
+   new ExtractTextPlugin('public/css/[name].css'),
     new webpack.optimize.UglifyJsPlugin({
       compress :{
         warnings : true,
@@ -121,6 +122,30 @@ module.exports = {
         filename:'./widget/star.html',
         template:'src/widget/star.html',
         inject:false
+    })
+    ,
+    new Manifest({
+      cache: [
+    
+        'http://127.0.0.1:8888/public/css/vendor.css',
+        'http://127.0.0.1:8888/public/img/thumb-9382f.jpeg',
+        '/index/index'
+     
+      ],
+      //Add time in comments.
+      timestamp: true,
+      // 生成的文件名字，选填
+      // The generated file name, optional.
+      filename:'./public/cache.manifest', 
+      // 注意*星号前面用空格隔开
+      network: [
+        ' *'
+      ],
+      
+      // manifest 文件中添加注释
+      // Add notes to manifest file.
+      headcomment: "praisebutton4 " , 
+      master: ['./views/layout.html']
     })
   ]
   

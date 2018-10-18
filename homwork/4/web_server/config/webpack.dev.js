@@ -50,8 +50,11 @@ module.exports = {
         test: /\.(png|jpg|gif|jpeg)$/,
         use: [
           {
-            loader: 'file-loader',
-            options: {}
+            loader: 'file-loader',        
+            options: {
+              name: 'public/img/[name].[ext]',
+              context: ''
+            }
           }
         ]
       }
@@ -102,10 +105,9 @@ module.exports = {
     new Manifest({
       cache: [
     
-        'css/vendor.css',
-        'index/index',
-        'index/praise',
-        'index/star'
+        '/public/css/vendor.css',
+        '/public/img/thumb.jpeg',
+        '/index/index'
      
       ],
       //Add time in comments.
@@ -115,14 +117,14 @@ module.exports = {
       filename:'./public/cache.manifest', 
       // 注意*星号前面用空格隔开
       network: [
-        ' index/post'
+        ' *'
       ],
       
       // manifest 文件中添加注释
       // Add notes to manifest file.
       headcomment: "praisebutton4 " , 
       master: ['./views/layout.html']
-  })
+    })
    
   ]
   

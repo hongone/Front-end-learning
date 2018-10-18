@@ -21,7 +21,7 @@ var _praisebutton = __webpack_require__(0);
 
 var f = new _praisebutton.Thumb(0);
 xtag.register('x-praise', {
-    content: '<div id="showzone"><img id="thumb" src="/img/thumb.jpeg" />' + '<span class="hide" id="animation">+1</span>' + '</div>',
+    content: '<div id="showzone"><div id="thumb"  /></div>' + '<span class="hide" id="animation">+1</span>' + '</div>',
     methods: {
         //显示数字动画效果
         praise: function praise(el) {

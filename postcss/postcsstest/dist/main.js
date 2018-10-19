@@ -86,14 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/css-loader/index.js?!./src/index.css":
-/*!***********************************************************!*\
-  !*** ./node_modules/css-loader??ref--4-1!./src/index.css ***!
-  \***********************************************************/
+/***/ "./node_modules/css-loader/index.js!./src/index.css":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader!./src/index.css ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \":root{\\n\\n    --mainColor: yellowgreen;\\n\\n}\\n\\n._2ivjil36bq3On5pLLeuhsP {\\n    color: var(--mainColor);\\n   \\n}\", \"\"]);\n\n// exports\nexports.locals = {\n\t\"test\": \"_2ivjil36bq3On5pLLeuhsP\"\n};\n\n//# sourceURL=webpack:///./src/index.css?./node_modules/css-loader??ref--4-1");
+eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \":root{\\n\\n    --mainColor: yellowgreen;\\n\\n}\\n\\n.test {\\n    color: var(--mainColor);\\n   \\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/index.css?./node_modules/css-loader");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("\n/**\n * When source maps are enabled, `style-loader` uses a link element
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader??ref--4-1!./index.css */ \"./node_modules/css-loader/index.js?!./src/index.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/index.css?");
+eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader!./index.css */ \"./node_modules/css-loader/index.js!./src/index.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/index.css?");
 
 /***/ }),
 
@@ -149,7 +149,7 @@ eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader??ref--
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_0__);\n//require css 有两种玩法 :  css module单页\n\ndocument.getElementById('app').innerHTML = `<h1 clas=\"${_index_css__WEBPACK_IMPORTED_MODULE_0___default.a.test}\">下一代CSS</h1>`;\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_0__);\n//require css 有两种玩法 :  css module单页\n\n//document.getElementById('app').innerHTML = `<h1 class=\"${item.test}\">下一代CSS</h1>`;\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

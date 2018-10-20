@@ -1,0 +1,1 @@
+import item from './components/main/main.js';

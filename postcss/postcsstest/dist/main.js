@@ -149,7 +149,7 @@ eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader!./inde
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_0__);\n//require css 有两种玩法 :  css module单页\n\n//document.getElementById('app').innerHTML = `<h1 class=\"${item.test}\">下一代CSS</h1>`;\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_0__);\n//require css 有两种玩法 :  css module单页\n\n//多页用的\n//import(\"./index.css\");\n//document.getElementById('app').innerHTML = `<h1 class=\"${item.test}\">下一代CSS</h1>`;\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

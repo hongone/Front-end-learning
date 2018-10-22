@@ -26,6 +26,9 @@
         .content {
             height: 300px;
             background-color: green;
+            padding-left: 150px;
+            padding-right: 120px;
+            
         }
 
         .footer {
@@ -39,19 +42,28 @@
             height: 300px;
             background-color: blueviolet;
             float: left;
+            margin-left: -100%;
+            position: relative;/*利用位置来调整*/
+            left: -150px;
         }
 
         .content .right {
             width: 120px;
             height: 300px;
             background-color: aquamarine;
-            float: right;
+            float: left; /*跟着浮动*/
+            margin-left: -120px;
+            position: relative;/*利用位置来调整*/
+            right: -120px;
+    
         }
 
         .content .middle {
 
             height: 300px;
             background-color: red;
+            float: left;
+            width: 100%;/*需要把其他浮动元素挤下去*/
 
         }
         .content .middle::after {
@@ -67,10 +79,10 @@
         <div class="header">头</div>
         <!-- 占位容器  content-->
         <div class="content">
-
+            <div class="middle">中</div>
             <div class="left">左</div>
             <div class="right">右</div>
-            <div class="middle">中</div>
+            
         </div>
         <div class="footer">版权</div>
     </div>

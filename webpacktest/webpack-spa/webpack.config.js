@@ -1,6 +1,7 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const argv = require('yargs-parser')(process.argv.slice(2)) // 强大选项解析器。参数分析器
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const argv = require('yargs-parser')(process.argv.slice(2)); // 强大选项解析器。参数分析器
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // console.log(argv);
 const _mode = argv.mode || 'development'
 const _modeflag = _mode == 'production'
@@ -31,23 +32,23 @@ let webpackBase = {
     ]
   },
   devServer: {
-      before(app){
-          app.get("/api/test",(req,res)=>{
-              res.json({
-                  code : 200,
-                  message  : "hello"
-              })
-          })
-      }
-	
-    },
+    before(app) {
+      app.get("/api/test", (req, res) => {
+        res.json({
+          code: 200,
+          message: "hello"
+        })
+      })
+    }
+
+  },
 
   plugins: [
     new HtmlWebpackPlugin({
       // Also generate a test.html
       filename: 'index.html',
       template: 'src/index.html',
-    
+
 
       minify: {
         removeComments: _modeflag,
@@ -55,10 +56,8 @@ let webpackBase = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: _modeflag ? 'styles/[name].[hash:5].css' : 'styles/[name].css',
-      chunkFilename: _modeflag
-        ? 'styles/[id].[hash:5]..css'
-        : 'styles/[id].css'
+      filename: _modeflag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
+      chunkFilename: _modeflag? 'styles/[id].[contenthash:5]..css': 'styles/[id].css'
     })
   ]
 }

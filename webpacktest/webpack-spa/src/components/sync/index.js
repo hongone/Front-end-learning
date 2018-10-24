@@ -1,4 +1,8 @@
-import item from './sync.css'
+import item from './sync.css';
+import { isArray } from 'lodash-es';
+const isArrayfnt = (args) => {
+  console.log(lodash.isArray(args));
+}
 const sync = () => {
   fetch('/api/test')
     .then(Response => Response.json())
@@ -6,12 +10,12 @@ const sync = () => {
       console.log('fetch结果', data.message)
     })
     .catch(err => {
-      console.log('错误', err);
-     // navigator.sendBeacon('http://127.0.0.1:8080/a.gif?errinfo= +err');
-      
+      console.log('hi,稍微休息一下', err);
+      // navigator.sendBeacon('http://127.0.0.1:8080/a.gif?errinfo= +err');
+
     })
   document.getElementById('app').innerHTML = `<h1 class="${item.test}">hello river8</h1>`
-  
+
   console.log('sync')
 }
-export { sync }
+export { sync, isArrayfnt }

@@ -7,10 +7,7 @@ module.exports = {
         //公司的CDN
         publicPath: '/'
     },
-    // optimization : {
-    //     minimizer:[
-    //     ]
-    // },
+   
     plugins: [
         new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/g,

@@ -94,7 +94,7 @@ let webpackBase = {
       }
     }),
     // new InlineManifestWebpackPlugin(),
-   new InlineManifestWebpackPlugin('runtime'),
+   //new InlineManifestWebpackPlugin('runtime'),
     new MiniCssExtractPlugin({
       filename: _modeflag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
       chunkFilename: _modeflag? 'styles/[id].[contenthash:5]..css': 'styles/[id].css'
@@ -111,6 +111,4 @@ let webpackBase = {
   ]
 }
 
-//module.exports = smp.wrap(merge(_mergeConfig, webpackBase));
-module.exports = merge(_mergeConfig, webpackBase);
-
+module.exports = smp.wrap(merge(_mergeConfig, webpackBase));

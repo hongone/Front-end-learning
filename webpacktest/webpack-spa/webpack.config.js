@@ -58,6 +58,11 @@ let webpackBase = {
     new MiniCssExtractPlugin({
       filename: _modeflag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
       chunkFilename: _modeflag? 'styles/[id].[contenthash:5]..css': 'styles/[id].css'
+    }),
+    new WebpackBuildNotifierPlugin({
+      title: "My Project Webpack Build",
+      logo: path.resolve("./img/favicon.png"),
+      suppressSuccess: true
     })
   ]
 }

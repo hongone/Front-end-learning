@@ -65,7 +65,7 @@ let webpackBase = {
         ]
       },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.(png|jpg|gif|ttf|otf|svg)$/i,
         use: [
           {
             loader: 'url-loader',

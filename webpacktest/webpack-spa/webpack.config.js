@@ -73,13 +73,28 @@ let webpackBase = {
   },
  optimization : {
    //Use the optimization.noEmitOnErrors to skip the emitting phase whenever there are errors while compiling. This ensures that no erroring assets are emitted. The emitted flag in the stats is false for all assets.
-       //noEmitOnErrors: false,
+       noEmitOnErrors: false,
       // namedChunks
       //  moduleIds
+
+      //生成公共文件
+      splitChunks:{
+        cacheGroups:{
+          commons :{
+            chunks : 'initial',
+            name : 'common',
+            minChunks : 2,
+            maxInitailRequests : 5,
+            maxSize : 0
+          }
+          
+        }
+      },
+      
       runtimeChunk :{
         name :"runtime"
       }
-      // runtimeChunk: 'single'
+    
     },
   plugins: [
     new HtmlWebpackPlugin({

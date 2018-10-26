@@ -8,15 +8,15 @@ var WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 var path = require('path')
 
 // console.log(argv);
-const _mode = argv.mode || 'development'
-const _modeflag = _mode == 'production'
-const _mergeConfig = require(`./config/webpack.${_mode}.js`)
-var merge = require('webpack-merge')
+const _mode = argv.mode || 'development';
+const _modeflag = _mode == 'production';
+const _mergeConfig = require(`./config/webpack.${_mode}.js`);
+var merge = require('webpack-merge');
 
-const setTitle = require('node-bash-title')
-setTitle('🍻  river8的' + _mode)
+const setTitle = require('node-bash-title');
+setTitle('🍻  river8的' + _mode);
 
-var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 // 计时工具
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
@@ -63,6 +63,37 @@ let webpackBase = {
             }
           }
         ]
+      },
+      //图片压缩
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
+            }
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif|ttf|otf|svg)$/i,

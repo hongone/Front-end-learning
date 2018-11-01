@@ -6,6 +6,7 @@ var  nums={
 var test = Object.keys(nums);
 console.log(test);
 
+//继承
 function Shape(){
     this.x = 0;
     this.y = 0;

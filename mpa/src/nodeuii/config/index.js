@@ -1,17 +1,21 @@
-import path  from ('path');
-import {extend}  from ('lodash-es');
+//import path  from 'path';
+//import {extend}  from 'lodash-es';
+import {extend}  from 'lodash';
 //公用的配置
 let config ={
     env : process.env.NODE_ENV
 }
-if(config.env=='development'){
+if(false){
+    console.log(1)
+}
+if(process.env.NODE_ENV=='development'){
     const localConfig ={
         
         port : 8081
     }
     config = extend(config,localConfig);
 }
-if(config.env=='production'){
+if(process.env.NODE_ENV=='production'){
     const localConfig ={
         
         port : 80
@@ -19,4 +23,4 @@ if(config.env=='production'){
     config = extend(config,localConfig);
 }
 
-export default conifg;
+export default config;

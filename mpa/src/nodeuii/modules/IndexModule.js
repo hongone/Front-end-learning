@@ -1,6 +1,6 @@
 class IndexModule{
-    constructor(ctx){
-        this.ctx=ctx;
+    constructor(app){
+        this.app=app;
     }
     getdata(){
         return new Promise((resolve,rejects)=>{

@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import config from './config';
 import router  from 'koa-simple-router';
-import routeInit from './routes/routeInit';
+import routesInit from './routes/routesInit';
 import errorHander from './middlewares/errorHandler'
 import log4js from 'log4js';
 
@@ -11,7 +11,7 @@ log4js.configure({
 });
 const logger = log4js.getLogger('cheese');
 const app = new Koa();
-routeInit.init(app,router);
+routesInit.init(app,router);
 errorHander.error(app,logger);
 app.listen(config.port,() => {
     console.log(`server is running on ${config.port}`);

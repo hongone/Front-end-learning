@@ -11,11 +11,13 @@ var _IndexModule2 = _interopRequireDefault(_IndexModule);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const indexController = {
-    index(ctx, next) {
-
+    indexAction(ctx, next) {
+        console.log(ctx);
         return async (ctx, next) => {
             let indexmodule = new _IndexModule2.default(ctx);
-            ctx.body = await indexmodule.getdata();
+            let result = await indexmodule.getdata();
+            console.log(result);
+            ctx.body = result;
         };
     }
 };

@@ -14,7 +14,7 @@ const routeInit = {
     init(app, router) {
         app.use(router(_ => {
             _.get('/', (ctx, next) => {
-                _indexController2.default.index(ctx, next);
+                _indexController2.default.indexAction(ctx, next);
             });
             _.post('/name/:id', (ctx, next) => {
                 // ...

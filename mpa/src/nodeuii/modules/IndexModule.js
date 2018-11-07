@@ -26,7 +26,7 @@ class IndexModule{
     getdata(){
         return new Promise((resolve,rejects)=>{
             setTimeout(() => {
-                resolve('the data');
+                resolve('数据已返回');
             }, 1000);
         });
     }

@@ -2,9 +2,7 @@ import indexController from './indexController'
 const routeInit={
     init(app,router){
         app.use(router(_ => {
-            _.get('/',  (ctx, next) => {
-                indexController.indexAction(ctx,next);
-            })
+            _.get('/', indexController.indexAction())
             _.post('/name/:id', (ctx, next) => {
                 // ...
             })

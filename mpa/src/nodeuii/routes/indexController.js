@@ -1,13 +1,13 @@
 import IndexModule from '../modules/IndexModule'
-const indexController ={
-    indexAction(ctx,next){
-       console.log(ctx);
-       return async(ctx,next)=>{
-            let indexmodule =new IndexModule(ctx);
+const indexController = {
+    indexAction() {
+
+        return async (ctx, next) => {
+            let indexmodule = new IndexModule(ctx);
             let result = await indexmodule.getdata();
-            console.log(result);
-            ctx.body = result;
-        }; 
+
+            ctx.body = await ctx.render('index', { content: result });
+        };
     }
 }
 export default indexController;

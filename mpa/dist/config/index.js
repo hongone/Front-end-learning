@@ -8,7 +8,9 @@ var lodash = require('lodash');
 // 公用的配置
 let config = {
   env: "production",
-  logPath :  path.resolve(__dirname ,'../log/')
+  logPath :  path.resolve(__dirname ,'../log/'),
+  staticDir : path.resolve(__dirname ,'../assets/'), 
+  viewsDir : path.resolve(__dirname ,'../views/')
 };
 
 {

@@ -13,9 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const routeInit = {
     init(app, router) {
         app.use(router(_ => {
-            _.get('/', (ctx, next) => {
-                _indexController2.default.indexAction(ctx, next);
-            });
+            _.get('/', _indexController2.default.indexAction());
             _.post('/name/:id', (ctx, next) => {
                 // ...
             });

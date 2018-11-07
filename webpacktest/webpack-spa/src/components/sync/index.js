@@ -3,6 +3,9 @@ import { isArray } from 'lodash-es';
 const isArrayfnt = (args) => {
   console.log(lodash.isArray(args));
 }
+//模拟引用公共代码
+import help from "../common/index.js";
+console.log(help.version);
 const sync = () => {
   fetch('/api/test')
     .then(Response => Response.json())
@@ -10,7 +13,7 @@ const sync = () => {
       console.log('fetch结果', data.message)
     })
     .catch(err => {
-      console.log('hi,稍微休息一下.', err);
+      console.log('hi,稍微休息一下', err);
       // navigator.sendBeacon('http://127.0.0.1:8080/a.gif?errinfo= +err');
 
     });

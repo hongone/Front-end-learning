@@ -3,8 +3,9 @@ const watch = require('gulp-watch');
 const babel = require('gulp-babel');
 const rollup = require('gulp-rollup');
 const replace = require('rollup-plugin-replace');
-//const resolve = require('rollup-plugin-node-resolve');
+
 const gulpSequence = require('gulp-sequence');
+const eslint = require('gulp-eslint');
 // 开发环境的gulp
 
 gulp.task('builddev', () => {
@@ -85,15 +86,33 @@ gulp.task('buildprod', () => {
 //   .pipe(gulp.dest('./dist'))
 // })
 
+gulp.task('lint',()=>{
+  return gulp.src(['./src/nodeuii/**/*.js'])
+      .pipe(eslint())
+      // eslint.format() outputs the lint results to the console.
+      // Alternatively use eslint.formatEach() (see Docs).
+      .pipe(eslint.format())
+      // To have the process exit with an error code (1) on
+      // lint error, return the stream and pipe to failAfterError last.
+      .pipe(eslint.failAfterError());
+});
+
 let _task = ['builddev'];
 
 if (process.env.NODE_ENV == 'production') {
-  _task = ['buildprod'];
-  _task = ['buildconfig'];
+  // _task = ['buildprod'];
+  // _task = ['buildconfig'];
   
  //_task = ['buildprod','buildconfig'];
   _task = gulpSequence('buildprod','buildconfig')
 }
+//代码检查
+if (process.env.NODE_ENV == 'lint') {
+
+   _task = ['lint'];
+
+}
+
 
 console.log(_task)
 //gulp.task('default', _task)

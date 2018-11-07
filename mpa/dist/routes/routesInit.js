@@ -10,14 +10,11 @@ var _indexController2 = _interopRequireDefault(_indexController);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const routeInit = {
+const routesInit = {
     init(app, router) {
         app.use(router(_ => {
             _.get('/', _indexController2.default.indexAction());
-            _.post('/name/:id', (ctx, next) => {
-                // ...
-            });
         }));
     }
 };
-exports.default = routeInit;
+exports.default = routesInit;

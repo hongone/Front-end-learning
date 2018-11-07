@@ -44,18 +44,17 @@ _log4js2.default.configure({
 });
 const logger = _log4js2.default.getLogger('cheese');
 const app = new _koa2.default();
-app.use((0, _koaStatic2.default)(_config2.default.staticDir));
 
 app.context.render = _co2.default.wrap((0, _koaSwig2.default)({
   root: _config2.default.viewsDir,
   autoescape: true,
-
   writeBody: false
 }));
-
-app.use(async ctx => ctx.body = await ctx.render('index'));
-_routesInit2.default.init(app, _koaSimpleRouter2.default);
+//注意：错误捕捉要放在前面，放在后面无法处理 
 _errorHandler2.default.error(app, logger);
+_routesInit2.default.init(app, _koaSimpleRouter2.default);
+app.use((0, _koaStatic2.default)(_config2.default.staticDir));
+
 app.listen(_config2.default.port, () => {
   console.log(`server is running on ${_config2.default.port}`);
 });

@@ -9,6 +9,13 @@ const indexController = {
     
             ctx.body = await ctx.render('index', { content: result });
         };
+    },
+    testAction() {
+
+        return async (ctx, next) => {
+        
+            ctx.body = await ctx.render('index/test', { content: 'test' });
+        };
     }
 }
 export default indexController;

@@ -11,7 +11,7 @@
     "server:lint": "cross-env NODE_ENV=lint gulp",
     "docs": "jsdoc ./src/nodeuii/**/*.js -d ./docs/nodeuii",
     "client:prod": "webpack --mode production --module-bind js=babel-loader",
-    "client:dev": "webpack --mode development --module-bind js=babel-loader"
+    "client:dev": "webpack --mode development "
   },
   "author": "",
   "license": "ISC",

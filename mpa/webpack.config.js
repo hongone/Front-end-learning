@@ -22,36 +22,37 @@ var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 var glob = require('glob');
 const files =glob.sync('./src/webapp/views/**/*.entry.js');
-console.log(files);
+
 
 //需要处理的入口文件
-let _entry ={
-
-}
-
+let _entry ={}
+//插件
+let _plugins =[];
 for(let item of files){
  
-  if(/.+\/([a-zA-Z0-9]+-[a-zA-Z0-9]+)(\.entry\.js)$/.test(item)== true){
+  if(/.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(item)== true){
    
     const entryKey = RegExp.$1;
    
     _entry[entryKey] = item;
+    const [dist,template] = entryKey.split('-');
+    _plugins.push(new HtmlWebpackPlugin({
+      // Also generate a test.html
+      filename: `../views/${dist}/pages/${template}.html`,
+      template: `src/webapp/views/${dist}/pages/${template}.html`,
+      inject : false,
+  
+      minify: {
+        removeComments: _modeflag,
+        collapseWhitespace: _modeflag
+      }
+    }))
   }
+
 
 }
 
-// let plugins = [ new HtmlWebpackPlugin({
-//     // Also generate a test.html
-//     filename: 'index.html',
-//     template: 'src/index.html',
 
-
-//     minify: {
-//       removeComments: _modeflag,
-//       collapseWhitespace: _modeflag
-//     }
-//   })
-// ]
 
 
 let webpackBase = {
@@ -184,14 +185,17 @@ let webpackBase = {
         ? 'styles/[id].[contenthash:5]..css'
         : 'styles/[id].css'
     }),
+    //所有html自动过来了
+    ..._plugins,
+    
     new WebpackBuildNotifierPlugin({
       title: 'Webpack 编译',
       logo: path.resolve('./favicon.png'),
       suppressSuccess: true
     }),
     // 进度条
-    new ProgressBarPlugin(),
-   // new CleanWebpackPlugin(pathsToClean)
+    new ProgressBarPlugin()
+    
   ]
 }
 

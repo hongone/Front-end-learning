@@ -1,13 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+//const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 const argv = require('yargs-parser')(process.argv.slice(2)) // 强大选项解析器。参数分析器
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 编译提醒插件
-var WebpackBuildNotifierPlugin = require('webpack-build-notifier')
+var WebpackBuildNotifierPlugin = require('webpack-build-notifier');
+
+var glob = require('glob');
 
 var path = require('path')
 
-// console.log(argv);
 const _mode = argv.mode || 'development';
 const _modeflag = _mode == 'production';
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
@@ -19,17 +20,30 @@ setTitle('🍻  river8的' + _mode);
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 // 计时工具
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+//const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-const smp = new SpeedMeasurePlugin()
-// dist清除
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-// the path(s) that should be cleaned
-let pathsToClean = ['dist']
-const loading = {
-  // css-doodle loading
-  html: '加载中。。。'
+//const smp = new SpeedMeasurePlugin()
+
+const files =glob.sync('.src/views/**/*.entry.js');
+for(let item of files){
+  
 }
+let _entry ={
+
+}
+let plugins = [ new HtmlWebpackPlugin({
+    // Also generate a test.html
+    filename: 'index.html',
+    template: 'src/index.html',
+
+
+    minify: {
+      removeComments: _modeflag,
+      collapseWhitespace: _modeflag
+    }
+  })
+]
+
 
 let webpackBase = {
   module: {
@@ -149,19 +163,9 @@ let webpackBase = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      // Also generate a test.html
-      filename: 'index.html',
-      template: 'src/index.html',
-      loading,
-
-      minify: {
-        removeComments: _modeflag,
-        collapseWhitespace: _modeflag
-      }
-    }),
+   
     // new InlineManifestWebpackPlugin(),
-    new InlineManifestWebpackPlugin('runtime'),
+   // new InlineManifestWebpackPlugin('runtime'),
     new MiniCssExtractPlugin({
       filename: _modeflag
         ? 'styles/[name].[contenthash:5].css'
@@ -177,7 +181,7 @@ let webpackBase = {
     }),
     // 进度条
     new ProgressBarPlugin(),
-    new CleanWebpackPlugin(pathsToClean)
+   // new CleanWebpackPlugin(pathsToClean)
   ]
 }
 

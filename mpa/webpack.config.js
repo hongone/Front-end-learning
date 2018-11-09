@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 编译提醒插件
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
-var glob = require('glob');
+
 
 var path = require('path')
 
@@ -19,33 +19,43 @@ setTitle('🍻  river8的' + _mode);
 
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-// 计时工具
-//const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-//const smp = new SpeedMeasurePlugin()
+var glob = require('glob');
+const files =glob.sync('./src/webapp/views/**/*.entry.js');
+console.log(files);
 
-const files =glob.sync('.src/views/**/*.entry.js');
-for(let item of files){
-  
-}
+//需要处理的入口文件
 let _entry ={
 
 }
-let plugins = [ new HtmlWebpackPlugin({
-    // Also generate a test.html
-    filename: 'index.html',
-    template: 'src/index.html',
+
+for(let item of files){
+ 
+  if(/.+\/([a-zA-Z0-9]+-[a-zA-Z0-9]+)(\.entry\.js)$/.test(item)== true){
+   
+    const entryKey = RegExp.$1;
+   
+    _entry[entryKey] = item;
+  }
+
+}
+
+// let plugins = [ new HtmlWebpackPlugin({
+//     // Also generate a test.html
+//     filename: 'index.html',
+//     template: 'src/index.html',
 
 
-    minify: {
-      removeComments: _modeflag,
-      collapseWhitespace: _modeflag
-    }
-  })
-]
+//     minify: {
+//       removeComments: _modeflag,
+//       collapseWhitespace: _modeflag
+//     }
+//   })
+// ]
 
 
 let webpackBase = {
+  entry : _entry,
   module: {
     rules: [
       
@@ -186,4 +196,4 @@ let webpackBase = {
 }
 
 // module.exports = smp.wrap(merge(_mergeConfig, webpackBase));
-module.exports = merge(_mergeConfig, webpackBase)
+module.exports = merge(_mergeConfig, webpackBase);

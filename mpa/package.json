@@ -26,6 +26,7 @@
     "log4js": "^3.0.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.5",
     "@babel/preset-env": "^7.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

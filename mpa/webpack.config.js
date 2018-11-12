@@ -38,7 +38,7 @@ for(let item of files){
     const [dist,template] = entryKey.split('-');
     _plugins.push(new HtmlWebpackPlugin({
       // Also generate a test.html
-      filename: `views/${dist}/pages/${template}.html`,
+      filename: `../views/${dist}/pages/${template}.html`,
       template: `src/webapp/views/${dist}/pages/${template}.html`,
       chuncks :['runtime','common',entryKey],
       inject : false,

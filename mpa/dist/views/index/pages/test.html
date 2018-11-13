@@ -1,12 +1,12 @@
 {% extends 'common:layout.html' %}
 {% block title %}我的多页系统 {% endblock %}
 {% block head %}
-<!--injectcss-->
+<link rel="stylesheet" type="text/css" href="/styles/index-test.css"  />
 {% endblock %}
 {% block content %}
-    {% extends '../../components/header/index.html' }
+    {% extends '../../../components/header/index.html' }
 {% endblock %}
 
 {% block script %}
-<script></sccript>
+<script src="/scripts/runtime.bundles.js"></script><script src="/scripts/index-test.bundles.js"></script>
 {% endblock %}

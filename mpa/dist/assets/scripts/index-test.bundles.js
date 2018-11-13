@@ -1,5 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["index-test"],{
 
+/***/ "./src/webapp/components/footer/footer.css":
+/*!*************************************************!*\
+  !*** ./src/webapp/components/footer/footer.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/webapp/components/footer/footer.css?");
+
+/***/ }),
+
 /***/ "./src/webapp/components/footer/footer.js":
 /*!************************************************!*\
   !*** ./src/webapp/components/footer/footer.js ***!
@@ -8,7 +19,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! ./footer.css */ \"./src/webapp/components/footer/footer.css\", 7));\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    init(){\n        \n    }\n});\n\n//# sourceURL=webpack:///./src/webapp/components/footer/footer.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n__webpack_require__(/*! ./footer.css */ \"./src/webapp/components/footer/footer.css\");\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    init(){\n        \n    }\n});\n\n//# sourceURL=webpack:///./src/webapp/components/footer/footer.js?");
 
 /***/ }),
 

@@ -1,4 +1,4 @@
-import("./footer.css");
+require("./footer.css");
 export default {
     init(){
         

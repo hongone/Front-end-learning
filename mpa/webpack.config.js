@@ -177,6 +177,7 @@ let webpackBase = {
       name: 'runtime'
     }
   },
+  profile : true, //原生计时
   plugins: [
     new ConsoleLogOnBuildWebpackPlugin(),
     // new InlineManifestWebpackPlugin(),
@@ -186,8 +187,8 @@ let webpackBase = {
         ? 'styles/[name].[contenthash:5].css'
         : 'styles/[name].css',
       chunkFilename: _modeflag
-        ? 'styles/[id].[contenthash:5]..css'
-        : 'styles/[id].css'
+        ? 'styles/[name].[contenthash:5]..css'
+        : 'styles/[name].css'
     }),
     //所有html自动过来了
     ..._plugins,

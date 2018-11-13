@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 编译提醒插件
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const ConsoleLogOnBuildWebpackPlugin = require('./config/ConsoleLogOnBuildWebpackPlugin.js');
+const HtmlAfterPlugin = require('./config/HtmlAfterPlugin.js');
+
 
 
 
@@ -189,7 +191,7 @@ let webpackBase = {
     }),
     //所有html自动过来了
     ..._plugins,
-    
+    new HtmlAfterPlugin(),
     new WebpackBuildNotifierPlugin({
       title: 'Webpack 编译',
       logo: path.resolve('./favicon.png'),

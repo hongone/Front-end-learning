@@ -4,6 +4,7 @@ const argv = require('yargs-parser')(process.argv.slice(2)) // 强大选项解�
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 编译提醒插件
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier');
+const ConsoleLogOnBuildWebpackPlugin = require('./config/ConsoleLogOnBuildWebpackPlugin.js');
 
 
 
@@ -175,7 +176,7 @@ let webpackBase = {
     }
   },
   plugins: [
-   
+    new ConsoleLogOnBuildWebpackPlugin(),
     // new InlineManifestWebpackPlugin(),
    // new InlineManifestWebpackPlugin('runtime'),
     new MiniCssExtractPlugin({

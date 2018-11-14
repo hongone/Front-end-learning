@@ -14,6 +14,8 @@ const routesInit = {
     init(app, router) {
         app.use(router(_ => {
             _.get('/', _indexController2.default.indexAction());
+            _.get('/index.html', _indexController2.default.indexAction());
+            _.get('/index/test', _indexController2.default.testAction());
         }));
     }
 };

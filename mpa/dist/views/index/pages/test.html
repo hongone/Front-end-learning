@@ -1,10 +1,10 @@
-{% extends 'common:layout.html' %}
+{% extends '../../common/layout.html' %}
 {% block title %}我的多页系统 {% endblock %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="/styles/index-test.css"  />
 {% endblock %}
 {% block content %}
-    {% extends '../../../components/header/index.html' }
+    {% include '../../../components/footer/index.html' %}
 {% endblock %}
 
 {% block script %}

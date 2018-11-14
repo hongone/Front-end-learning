@@ -29,7 +29,7 @@ class HtmlAfterPlugin {
             compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tap(pluginName,htmlPluginData=>{
                 let _html = htmlPluginData.html;
                 _html = _html.replace(/widgets:/g,'../../../');
-              
+                _html = _html.replace(/common:/g,'../../common/');
                 
                 const result = assetHelp(htmlPluginData.assets);
                 _html = _html.replace('<!--injectcss-->',result.css.join(""));

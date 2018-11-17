@@ -8,13 +8,9 @@ var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _koaSimpleRouter = require('koa-simple-router');
+var _awilix = require('awilix');
 
-var _koaSimpleRouter2 = _interopRequireDefault(_koaSimpleRouter);
-
-var _routesInit = require('./routes/routesInit');
-
-var _routesInit2 = _interopRequireDefault(_routesInit);
+var _awilixKoa = require('awilix-koa');
 
 var _errorHandler = require('./middlewares/errorHandler');
 
@@ -50,9 +46,23 @@ app.context.render = _co2.default.wrap((0, _koaSwig2.default)({
   autoescape: true,
   writeBody: false
 }));
+
 //注意：错误捕捉要放在前面，放在后面无法处理 
 _errorHandler2.default.error(app, logger);
-_routesInit2.default.init(app, _koaSimpleRouter2.default);
+const container = (0, _awilix.createContainer)();
+//每一次请求
+app.use((0, _awilixKoa.scopePerRequest)(container));
+//装载所有的Service到容器去。载入controllers
+container.loadModules([__dirname + '/services/*.js'], {
+  formatName: 'camelCase',
+  resolverOption: {
+
+    lifetime: _awilix.Lifetime.SCOPED
+  }
+});
+//载入controllers
+app.use((0, _awilixKoa.loadControllers)(__dirname + '/routes/*.js'));
+
 app.use((0, _koaStatic2.default)(_config2.default.staticDir));
 
 app.listen(_config2.default.port, () => {

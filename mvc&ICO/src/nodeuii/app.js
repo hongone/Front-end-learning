@@ -1,8 +1,9 @@
 import Koa from 'koa';
 import config from './config';
-import router  from 'koa-simple-router';
-import routesInit from './routes/routesInit';
-import errorHander from './middlewares/errorHandler'
+import {createContainer,Lifetime} from 'awilix';
+import {loadControllers,scopePerRequest} from 'awilix-koa'; 
+import errorHander from './middlewares/errorHandler';
+
 import log4js from 'log4js';
 import serve from 'koa-static';
 import render from 'koa-swig';
@@ -22,9 +23,25 @@ app.context.render = co.wrap(render({
   autoescape: true,
   writeBody : false
 }));
+
 //注意：错误捕捉要放在前面，放在后面无法处理 
 errorHander.error(app,logger);
-routesInit.init(app,router);
+const container = createContainer();
+//每一次请求
+app.use(scopePerRequest(container));
+//装载所有的Service到容器去。载入controllers
+container.loadModules([__dirname +'/services/*.js'],{
+  formatName: 'camelCase',
+  resolverOption:{
+    
+    lifetime : Lifetime.SCOPED
+  }
+}
+);
+//载入controllers
+app.use(loadControllers(__dirname + '/routes/*.js'));
+
+
 app.use(serve(config.staticDir));
 
 app.listen(config.port,() => {

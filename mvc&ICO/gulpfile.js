@@ -15,7 +15,8 @@ gulp.task('builddev', () => {
     .pipe(
       babel({
         babelrc: false,
-        "plugins": ['transform-es2015-modules-commonjs']
+        "plugins": [ "transform-decorators-legacy"
+          ,'transform-es2015-modules-commonjs']
       })
     )
     .pipe(gulp.dest('./dist'));
@@ -41,7 +42,7 @@ gulp.task('buildprod', () => {
       babel({
         babelrc: false,
         ignore : ['./src/nodeuii/config/index.js'],
-        "plugins": ["transform-es2015-modules-commonjs"]
+        "plugins": ["transform-decorators-legacy","transform-es2015-modules-commonjs"]
     }))
 
     .pipe(gulp.dest('./dist'))

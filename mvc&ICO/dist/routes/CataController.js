@@ -38,7 +38,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 }
 
 // @route('/data')
-let DataController = (_dec = (0, _awilixKoa.route)('/data'), _dec2 = (0, _awilixKoa.route)('/index'), _dec3 = (0, _awilixKoa.GET)(), _dec(_class = (_class2 = class DataController {
+let CataController = (_dec = (0, _awilixKoa.route)('/sameroute'), _dec2 = (0, _awilixKoa.route)('/index'), _dec3 = (0, _awilixKoa.GET)(), _dec(_class = (_class2 = class CataController {
   constructor({ dataService }) {
     // 注入indexService
     this.dataService = dataService;
@@ -50,8 +50,8 @@ let DataController = (_dec = (0, _awilixKoa.route)('/data'), _dec2 = (0, _awilix
     // console.log(result1); 故意写错，来测试错误捕捉处理
 
     // ctx.body = await ctx.render('index', { content: result });
-    ctx.body = { result };
+    ctx.body = 'CataController';
   }
 
 }, (_applyDecoratedDescriptor(_class2.prototype, 'indexAction', [_dec2, _dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'indexAction'), _class2.prototype)), _class2)) || _class);
-exports.default = DataController;
+exports.default = CataController;

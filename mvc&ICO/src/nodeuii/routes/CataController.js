@@ -1,8 +1,8 @@
 import { route, POST, GET } from 'awilix-koa'
 
 // @route('/data')
-@route('/data')
-class DataController {
+@route('/sameroute')
+class CataController {
   constructor ({ dataService }) {
     // 注入indexService
     this.dataService = dataService
@@ -15,8 +15,8 @@ class DataController {
     // console.log(result1); 故意写错，来测试错误捕捉处理
 
     // ctx.body = await ctx.render('index', { content: result });
-    ctx.body = {result};
+    ctx.body = 'CataController';
   }
 
 }
-export default DataController
+export default CataController

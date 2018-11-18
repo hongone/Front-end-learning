@@ -31,7 +31,7 @@ let DataService = class DataService {
     getdata() {
         return new Promise((resolve, rejects) => {
             setTimeout(() => {
-                resolve('Data');
+                resolve('Data!');
             }, 1000);
         });
     }

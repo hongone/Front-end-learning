@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _desc, _value, _class2;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2;
 
 var _awilixKoa = require('awilix-koa');
 
@@ -37,24 +37,21 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-// @route('/index.html')
-let IndexController = (_dec = (0, _awilixKoa.route)('/'), _dec2 = (0, _awilixKoa.route)('index'), _dec3 = (0, _awilixKoa.GET)(), _dec4 = (0, _awilixKoa.route)('test'), _dec5 = (0, _awilixKoa.GET)(), _dec6 = (0, _awilixKoa.POST)(), _dec(_class = (_class2 = class IndexController {
-  constructor({ indexService }) {
+// @route('/data')
+let AataController = (_dec = (0, _awilixKoa.route)('/sameroute'), _dec2 = (0, _awilixKoa.route)('/index'), _dec3 = (0, _awilixKoa.GET)(), _dec(_class = (_class2 = class AataController {
+  constructor({ dataService }) {
     // 注入indexService
-    this.indexService = indexService;
+    this.dataService = dataService;
   }
   // @route('/index')  是访问 locahost:8000//index
 
   async indexAction(ctx, next) {
-    let result = await this.indexService.getdata();
+    let result = await this.dataService.getdata();
     // console.log(result1); 故意写错，来测试错误捕捉处理
 
     // ctx.body = await ctx.render('index', { content: result });
-    ctx.body = { result };
+    ctx.body = 'AataController1';
   }
 
-  async testAction(ctx, next) {
-    ctx.body = await ctx.render('index/pages/test', { content: 'test' });
-  }
-}, (_applyDecoratedDescriptor(_class2.prototype, 'indexAction', [_dec2, _dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'indexAction'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'testAction', [_dec4, _dec5, _dec6], Object.getOwnPropertyDescriptor(_class2.prototype, 'testAction'), _class2.prototype)), _class2)) || _class);
-exports.default = IndexController;
+}, (_applyDecoratedDescriptor(_class2.prototype, 'indexAction', [_dec2, _dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'indexAction'), _class2.prototype)), _class2)) || _class);
+exports.default = AataController;

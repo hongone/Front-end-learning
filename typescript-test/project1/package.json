@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "static" : "ts-node static.ts",
+    "extends" : "ts-node extends.ts",
+    "overload" : "ts-node overload.ts",
+    "interface" : "ts-node interface.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
   }
 }

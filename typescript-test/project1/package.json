@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "static" : "ts-node static.ts",
-    "extends" : "ts-node extends.ts",
-    "overload" : "ts-node overload.ts",
-    "interface" : "ts-node interface.ts"
+    "static": "ts-node static.ts",
+    "extends": "ts-node extends.ts",
+    "overload": "ts-node overload.ts",
+    "interface": "ts-node interface.ts",
+    "generics": "ts-node generics.ts"
   },
   "author": "",
   "license": "ISC",

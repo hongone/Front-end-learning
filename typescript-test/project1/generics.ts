@@ -4,3 +4,4 @@ function Hellow<T>(arg:T):T{
 
 let output = Hellow("tom");
 console.log(output);
+

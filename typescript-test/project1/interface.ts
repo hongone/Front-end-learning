@@ -30,25 +30,26 @@ console.log(myArray[1]);
 
 //接口类 实现
 interface ClockInterface {
-    currentTime: string;
-    setTime(d: string):void;
+    currentTime: Date;
+    setTime(d: Date):void;
 }
 class Clock implements ClockInterface {
-    currentTime : string;
+    currentTime : Date;
     constructor(){
-        this.currentTime = '';
+        this.currentTime = new Date();
     }
-    setTime(d: string) {
+    setTime(d: Date) {
         this.currentTime = d;
     }
     getTime(){
-        return this.currentTime;
+        return this.currentTime.toTimeString();
     }
 }
 
 let clock = new Clock();
-clock.setTime('23:14');
+clock.setTime(new Date());
 console.log(clock.getTime());
+
 
 //接口继承
 interface Shape{

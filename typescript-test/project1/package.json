@@ -9,7 +9,10 @@
     "extends": "ts-node extends.ts",
     "overload": "ts-node overload.ts",
     "interface": "ts-node interface.ts",
-    "generics": "ts-node generics.ts"
+    "generics": "ts-node generics.ts",
+    "decorators": "ts-node decorators.ts",
+    "Mixins": "ts-node Mixins.ts"
+    
   },
   "author": "",
   "license": "ISC",

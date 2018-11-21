@@ -1,2 +1,2 @@
 import '../controller/IndexController';
-import '../service/IndexService';
+import '../services/UserInfoService';

@@ -1,10 +1,10 @@
-import { proddeController,Router,controller,interfaces ,inject,httpGet ,TYPE} from "../ioc/ioc";
+import { provideController,Router,controller,interfaces ,inject,httpGet ,TYPE} from "../ioc/ioc";
 import TAGS from "../constant/tags";
 import { Model } from "../model/User";
 
 
 @controller('/')
-@proddeController(TYPE.Controller,"IndexController")
+@provideController(TYPE.Controller,"IndexController")
 export default class IndexController implements interfaces.Controller {
     //需要继承interfaces.Controller才能用
     private indexService

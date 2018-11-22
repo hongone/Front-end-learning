@@ -4,7 +4,7 @@ import * as Router from "koa-router";
 import {TYPE, controller,interfaces,httpGet } from "inversify-koa-utils";
 let provideController = function(identifer,name){
     return fluentProvide(identifer)
-    .whenAnyAncestorNamed(name)
+    .whenTargetNamed(name)
     .done();
 }
 export {

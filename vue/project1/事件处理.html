@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>span {
+        color: red;
+    }</style>
+</head>
+<body>
+   <div id="app">
+    
+    <!-- <form v-on:submit.prevent="submitMyForm" method="get" action="index.php">    -->
+    <form @submit.prevent="submitMyForm" method="get" action="index.php">
+     <!-- 加css进行隐藏 -->
+    <p v-show="!message"><span>**请输入用户名**</span></p> 
+    <h1>{{message}}</h1>
+  
+       <input type="text" name=""  v-model="message">
+        <input type="submit" name=""  value="提交" > <br>
+        <input type="text" name=""  v-model="num">  <br>
+        <span>{{ num }}</span><br>
+        <input type="button" name=""  value="加" @click="add" >  
+    </form> 
+   </div>
+  
+   <script type="text/javascript">
+    //console.log(Vue);
+    new Vue({
+        el:"#app",
+        data:{
+            message: "Hello Vue",
+            num:0
+        },
+        methods:{
+            submitMyForm:function (e) {
+               // e.preventDefault();
+                alert('提交成功')   
+            },
+            add: function(e){
+                this.num++;
+            }
+        }
+    })
+   </script>
+    
+</body>
+</html>

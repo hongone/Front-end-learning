@@ -8,11 +8,31 @@
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>span {
+        color: red;
+    }</style>
 </head>
 <body>
-   
+   <div id="app">
+    <p v-if="!message"><span>**请输入用户名**</span></p>   
+    <!-- 加css进行隐藏 -->
+    <p v-show="!message"><span>**请输入用户名**</span></p> 
+    <h1>{{message}}</h1>
+  
+       <input type="text" name=""  v-model="message">
+       <pre>
+        {{$data | json}}
+        </pre>
+   </div>
+  
    <script type="text/javascript">
-    console.log(Vue);
+    //console.log(Vue);
+    new Vue({
+        el:"#app",
+        data:{
+            message: "Hello Vue"
+        }
+    })
    </script>
     
 </body>

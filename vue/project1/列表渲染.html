@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    li{
+        cursor: pointer;
+    }
+    .done{
+        text-decoration-line: line-through
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="task in tasks" :class="{'done':task.completed }" @click="unSelected(task)" >{{task.content}}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el : "#app",
+            data:{
+                tasks:[{
+                    content:"看电影",
+                    completed : false
+                },
+                {
+                    content:"打篮球",
+                    completed : false
+                },
+                {
+                    content:"写代码",
+                    completed : false
+                }]
+            },
+            methods:{
+                unSelected : function(task){
+                    task.completed = !task.completed;
+                }
+            }
+            
+        })
+    </script>
+</body>
+</html>

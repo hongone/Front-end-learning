@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>score {{ score>=90?"优秀生":"一般学生" }}</span>
+        <span>{{level}}</span>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el : "#app",
+            data:{
+                score:95
+            },
+            computed :{
+                level:function(){
+                    return this.score>=90?"优秀生":"一般学生";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

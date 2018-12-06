@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-resource</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <members></members>
+    </div>
+    <template id="members-template">
+            <ul>
+                    <li v-for="item in list"   >姓名：{{item.name}} 性别: {{item.gender}}</li>
+            </ul>
+    </template>
+    <script type="text/javascript">
+        Vue.component('members',{
+            template:'#members-template',
+            data :function(){
+                return{
+                    list:[]
+                }
+            },
+            created: function() {
+                var me = this;
+                this.$http.get('./data.js').then(response=>{
+                    let data = response.body.member;
+                    me.list = data;
+                },response=>{
+                    me.list =[];
+                });
+            }
+
+        })
+        new Vue({
+            el : "#app",
+            data :{
+                list :[]
+            },
+          
+        })
+        
+    </script>
+</body>
+</html>

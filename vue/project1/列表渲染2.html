@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+        cursor: pointer;
+    }
+    .done{
+        text-decoration-line: line-through
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <tasks :items="tasks"></tasks>
+    </div>
+    <template id="task-template">
+        <div>
+            <p>
+                <span>还剩几个<span v-show="remain">({{remain}})</span></span>
+            </p>
+            <ul>
+                <li v-for="task in items" :class="{'done':task.completed }" @click="unSelected(task)">{{task.content}}
+                    <span @click="deleteTask(task)">×</span></li>
+            </ul>
+        </div>
+
+    </template>
+    <script type="text/javascript">
+        Vue.component('tasks', {
+            props: ['items'],
+            template: '#task-template',
+            methods: {
+                unSelected: function (task) {
+                    task.completed = !task.completed;
+                },
+                deleteTask: function (task) {
+                    // this.items.$remove(task); //Vue2里已经移除$remove
+                    this.items.splice(this.items.indexOf(task), 1);
+                }
+            },
+            computed: {
+                remain: function () {
+                    return this.items.filter(function (task) {
+                        return !task.completed;
+                    }).length;
+                }
+            }
+
+        })
+        new Vue({
+            el: "#app",
+            data: {
+                tasks: [{
+                    content: "看电影",
+                    completed: false
+                },
+                {
+                    content: "打篮球",
+                    completed: false
+                },
+                {
+                    content: "写代码",
+                    completed: false
+                }]
+            },
+
+        })
+    </script>
+</body>
+
+</html>

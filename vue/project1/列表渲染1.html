@@ -21,6 +21,7 @@
             <li v-for="task in tasks" :class="{'done':task.completed }" @click="unSelected(task)" >{{task.content}}</li>
         </ul>
     </div>
+    
     <script type="text/javascript">
         new Vue({
             el : "#app",

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div id="demo">
+        <button v-on:click=" show = !show ">Toggle</button>
+        <!-- 把要实现的动画放在transition中 -->
+        <transition name="custom-classes-transition" leave-active-class="animated flash" enter-active-class="animated tada">
+            <p v-if="show">Hellow Vue Transition</p>
+        </transition>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: "#demo",
+            data: {
+                show: true
+            }
+        })
+
+    </script>
+</body>
+
+</html>

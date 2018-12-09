@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/velocity/1.5.1/velocity.min.js"></script>
+  
+    <!-- <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script> -->
+
+
+</head>
+
+<body>
+    <div id="demo">
+        <button v-on:click=" show = !show ">Toggle</button>
+        <!-- 把要实现的动画放在transition中 -->
+        <transition v-on:before-enter="beforeEnter" v-bind:css="false" v-on:enter="enter">
+            <p v-if="show">Hellow Vue Transition</p>
+        </transition>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: "#demo",
+            data: {
+                show: true
+            },
+            methods: {
+                // --------
+                // 进入中
+                // --------
+
+                beforeEnter: function (el) {
+                    el.style.opacity = 0;
+                    el.style.height = 0;
+                },
+                // 当与 CSS 结合使用时
+                // 回调函数 done 是可选的
+                enter: function (el, done) {
+                    Velocity(el, {
+                        opacity: 1,
+                        fontSize: '1.4rem',
+                        //下面两个属性velocity2 不支持，velocity1.5支持
+                        translateX: "10px",
+                        rotateZ:"10deg"
+                        
+                    }, { duration: 500 })
+                    done()
+                },
+                afterEnter: function (el) {
+                    // ...
+                },
+                enterCancelled: function (el) {
+                    // ...
+                },
+
+                // --------
+                // 离开时
+                // --------
+
+                beforeLeave: function (el) {
+                    // ...
+                },
+                // 当与 CSS 结合使用时
+                // 回调函数 done 是可选的
+                leave: function (el, done) {
+                    // ...
+                    done()
+                },
+                afterLeave: function (el) {
+                    // ...
+                },
+                // leaveCancelled 只用于 v-show 中
+                leaveCancelled: function (el) {
+                    // ...
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

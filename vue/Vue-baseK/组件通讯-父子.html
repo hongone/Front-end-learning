@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+      
+        
+    </div>
+    <script type="text/javascript">
+//子组件
+    Vue.component('child',{
+        data(){
+            return {
+                mymessage: this.message
+            }
+        },
+        template :`
+            <div>
+                <h1>{{mymessage}}</h1>
+            </div>
+        `,
+        props :['message']
+    });
+//父组件
+    Vue.component('parent',{
+        data(){
+            return {
+                mymessage: 'hellow'
+            }
+        },
+        template :`
+            <div>
+                <h1>我是父节点</h1>
+               <child :message="mymessage"/> 
+            </div>
+            
+        `
+    })
+    var app=new Vue({
+        el:'#app',
+        template :`
+        <div><parent/></div>
+        `
+    })    
+</script>
+    
+</body>
+</html>

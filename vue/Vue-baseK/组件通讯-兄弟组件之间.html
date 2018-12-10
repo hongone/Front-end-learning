@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>兄弟之间通讯</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+
+    </div>
+    <script type="text/javascript">
+         //兄弟组件
+        Vue.component('brother1', {
+            data() {
+                return {
+                    mymessage: this.message
+                }
+            },
+            template: `
+            <div>
+                <h1>兄弟节点1</h1>
+                <input type="text" v-model="mymessage" @input="passDate(mymessage)"/>
+            </div>
+        `,
+            methods: {
+                passDate: function (val) {
+                    bus.$emit("globalEvent", val)
+                }
+            }
+        });
+        //兄弟组件
+        Vue.component('brother2', {
+            data() {
+                return {
+                    mymessage: 'hello',
+                    brothermessage: ""
+                }
+            },
+            mounted() {
+                bus.$on("globalEvent", (val) => {
+                    this.brothermessage = val;
+                })
+            },
+            template: `
+            <div>
+                <h1>兄弟节点2</h1>
+                <p>我是传递过来的数据:{{brothermessage}}</p>
+          
+            </div>
+            
+        `
+        })
+        //定义一个总线,通过监听发送数据 来传递消息
+        var bus = new Vue();
+        var app = new Vue({
+            el: '#app',
+            template: `
+        <div>
+        <brother1/>
+        <brother2/>
+        </div>
+        `
+        })    
+    </script>
+
+</body>
+
+</html>

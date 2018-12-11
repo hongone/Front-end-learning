@@ -1,17 +1,16 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-   <input type="text" placeholder="测试Keepalive" name="" />
-   <router-link to="/testKeep">跳到测试页</router-link> 
+    <h1>{{ msg }}</h1> 
+    <router-link to="/">跳到首页</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'TestKeep',
   data () {
     return {
-      msg: 'Welcome to 海口'
+      msg: '测试Keepalive'
     }
   }
 }

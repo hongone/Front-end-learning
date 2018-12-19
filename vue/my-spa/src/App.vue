@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <ul>    
-      <li><router-link to="/">首页</router-link></li>
-      <li><router-link to="/test">测试页</router-link></li>
+    <ul>
+      <li>
+        <router-link to="/">首页</router-link>
+      </li>
+      <li>
+        <router-link to="/test">测试页</router-link>
+      </li>
     </ul>
     <img src="./assets/logo.png">
     <router-view/>
@@ -17,15 +21,15 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
-ul,li{
-  list-style:none;
+ul,
+li {
+  list-style: none;
 }
-
 </style>

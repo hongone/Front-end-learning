@@ -1,15 +1,15 @@
 <style src="./Test.css"></style>
-<<template>
+<template>
     <div class="test">
-        Test component 
+        Test component
     </div>
 </template>
 <script>
-    export default{
-        mounted(){
-            import("./Test.js").then((res)=>{
-                res.default();
-            })
-        }
-    }
+export default {
+  mounted () {
+    import('./Test.js').then(res => {
+      res.default()
+    })
+  }
+}
 </script>

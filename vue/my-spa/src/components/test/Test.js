@@ -1,5 +1,5 @@
-const initTest=()=>{
-    console.log('Test init');
-};
+const initTest = () => {
+  console.log('Test init')
+}
 
-export default initTest;
+export default initTest

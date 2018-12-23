@@ -1,7 +1,7 @@
 <style src="./Test.css"></style>
 <template>
     <div class="test">
-        Test component
+       <h1>Test component</h1>
     </div>
 </template>
 <script>

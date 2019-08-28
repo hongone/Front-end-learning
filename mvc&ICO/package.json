@@ -18,12 +18,13 @@
   "dependencies": {
     "awilix": "^4.0.0",
     "awilix-koa": "^3.0.0",
+    "babel-core": "^6.26.3",
     "co": "^4.6.0",
     "koa": "^2.6.1",
     "koa-simple-router": "^0.2.0",
     "koa-static": "^5.0.0",
     "koa-swig": "^2.2.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "lodash-es": "^4.17.11",
     "log4js": "^3.0.6"
   },
@@ -47,7 +48,7 @@
     "gulp-watch": "^5.0.1",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^4.6.0",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.3",
     "mini-css-extract-plugin": "^0.4.4",
     "node-bash-title": "0.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.1",

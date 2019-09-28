@@ -1,0 +1,6 @@
+:root {
+    --bgColor: yellowgreen;
+}
+h1 {
+    color: var(--bgColor);
+}

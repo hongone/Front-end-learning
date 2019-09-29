@@ -12,13 +12,15 @@
 <body>
     <script>
         if('ServiceWorker' in window){
-            navigator.serviceWorker.register('/sw.js').
+            //workbox方法
+            navigator.serviceWorker.register('/sw-wb.js').
             then(function(registation){
                 console.log('serviceWorker登记范围',registation.scope);
             }).catch(function(e){
                 console.log('serviceWorker登记失败',e);
             });
         }
+
     </script>
    <h1>国庆70周年</h1> 
 </body>

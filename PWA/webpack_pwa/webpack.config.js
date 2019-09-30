@@ -4,8 +4,9 @@ const argv = require('yargs-parser')(process.argv.slice(2)) // 强大选项解�
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 编译提醒插件
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier')
-const WorkboxPlugin = require('workbox-webpack-plugin');
-
+//const WorkboxPlugin = require('workbox-webpack-plugin');
+//PWA插件
+const { GenerateSW } = require('workbox-webpack-plugin')
 var path = require('path')
 
 // console.log(argv);
@@ -24,7 +25,7 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
 const smp = new SpeedMeasurePlugin()
 // dist清除
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // the path(s) that should be cleaned
 let pathsToClean = ['dist']
 const loading = {
@@ -62,6 +63,9 @@ let webpackBase = {
               modules: true,
               localIdentName: '[path][name]__[local]--[hash:base64:5]'
             }
+          },
+          {
+            loader: "postcss-loader"
           }
         ]
       },
@@ -153,7 +157,7 @@ let webpackBase = {
     new HtmlWebpackPlugin({
       // Also generate a test.html
       filename: 'index.html',
-      template: 'src/index.html',
+      template: './src/index.html',
       loading,
 
       minify: {
@@ -162,7 +166,7 @@ let webpackBase = {
       }
     }),
     // new InlineManifestWebpackPlugin(),
-    new InlineManifestWebpackPlugin('runtime'),
+    // new InlineManifestWebpackPlugin('runtime'),
     new MiniCssExtractPlugin({
       filename: _modeflag
         ? 'styles/[name].[contenthash:5].css'
@@ -178,9 +182,41 @@ let webpackBase = {
     }),
     // 进度条
     new ProgressBarPlugin(),
-    // new CleanWebpackPlugin(),
-    new WorkboxPlugin.InjectManifest({
+    new CleanWebpackPlugin(),
+  /*  new WorkboxPlugin.InjectManifest({
       swSrc: './src/sw.js',
+    })
+	*/
+    new GenerateSW({
+      importWorkboxFrom: 'local',
+      skipWaiting: true,
+      clientsClaim: true,
+      runtimeCaching: [
+        {
+          // To match cross-origin requests, use a RegExp that matches
+          // the start of the origin:
+          urlPattern: new RegExp('^https://api'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            // Configure which responses are considered cacheable.
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
+        },
+        {
+          urlPattern: new RegExp('^https://cdn'),
+          // Apply a network-first strategy.
+          handler: 'NetworkFirst',
+          options: {
+            // Fall back to the cache after 2 seconds.
+            networkTimeoutSeconds: 2,
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
+        }
+      ]
     })
   ]
 }

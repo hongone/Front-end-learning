@@ -1,6 +1,9 @@
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const {join} = require('path');
 module.exports = {
+    entry : {
+        app: './src/scripts/index.js'
+    },
     output: {
         path: join(__dirname,'../dist/assets'),
      //   filename: "scripts/[name].[hash:5].bundles.js",

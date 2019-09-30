@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        if('ServiceWorker' in window){
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>Document</title></head><body><script>if('ServiceWorker' in window){
             // navigator.serviceWorker.register('/sw.js').
             //workbox方法
-            navigator.serviceWorker.register('/sw-wb.js').
+            navigator.serviceWorker.register('/service-worker.js').
             then(function(registation){
                 console.log('serviceWorker登记范围',registation.scope);
             }).catch(function(e){
                 console.log('serviceWorker登记失败',e);
             });
-        }
-
-    </script>
-   <h1>国庆70周年</h1> 
-</body>
-</html>
+        }</script><h1>国庆70周年</h1><script type="text/javascript" src="/scripts/runtime.b2db8.bundles.js"></script><script type="text/javascript" src="/scripts/app.05f8c.bundles.js"></script></body></html>

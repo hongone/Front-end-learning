@@ -7,13 +7,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style/index.css" />
     <script src="./script/index.js" language="javascript"></script>
-    <script src="./script/test.js"></script>
+    <script src="./script/test.js" language="javascript"></script>
 </head>
 <body>
     <script>
         if('ServiceWorker' in window){
             //workbox方法
-            navigator.serviceWorker.register('/sw-wb.js').
+            navigator.serviceWorker.register('/sw.js').
             then(function(registation){
                 console.log('serviceWorker登记范围',registation.scope);
             }).catch(function(e){

@@ -1,13 +1,16 @@
 :root{
-    --mainColor: yellowgreen;   
+
+    --mainColor: yellowgreen;
+
 }
 .c-main .test {
         color: yellowgreen;
         color: var(--mainColor);
+    
     }
 .c-main h1,.c-main h2,.c-main h3,.c-main h4,.c-main h5,.c-main h6 {
         margin: 0;
-    }
+      }
 .c-main .apple-tab{
         font-size : 1em;
         color : yellowgreen;

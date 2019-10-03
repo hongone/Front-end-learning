@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 const argv = require('yargs-parser')(process.argv.slice(2)) // 强大选项解析器。参数分析器
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 编译提醒插件
@@ -61,19 +62,51 @@ let webpackBase = {
           //   }
           // },
           { 
-            loader: 'css-loader'
+            loader: 'css-loader', options: { importLoaders: 1 } 
           },
+          "postcss-loader"        
+        ]
+      },
+      //图片压缩
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
           {
-            loader: "postcss-loader",
+            loader: 'image-webpack-loader',
             options: {
-              ident: 'postcss',
-              plugins: [
-                require('autoprefixer')({
-                  'overrideBrowserslist': ['> 5%', 'last 2 versions']
-                }),
-              ]
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
             }
-          },       
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif|ttf|otf|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10 * 1024
+            }
+          }
         ]
       }
     ]

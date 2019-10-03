@@ -3,4 +3,6 @@
 }
 h1 {
     color: var(--bgColor);
+    transition: margin-right 2s;
+    box-shadow: 0 0 3px 5px rgba(222, 222, 222, .3);
 }

@@ -1,14 +1,17 @@
 :root{
-    --mainColor: yellowgreen;   
+
+    --mainColor: yellowgreen;
+
 }
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 .c-main{
     & .test {
         color: var(--mainColor);
+    
     }
     & :--heading {
         margin: 0;
-    }
+      }
     & .apple-tab{
         font-size : 1em;
         color : var(--mainColor);

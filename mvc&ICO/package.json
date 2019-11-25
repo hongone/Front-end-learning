@@ -25,7 +25,7 @@
     "koa-static": "^5.0.0",
     "koa-swig": "^2.2.1",
     "lodash": "^4.17.15",
-    "lodash-es": "^4.17.11",
+    "lodash-es": "^4.17.14",
     "log4js": "^3.0.6"
   },
   "devDependencies": {

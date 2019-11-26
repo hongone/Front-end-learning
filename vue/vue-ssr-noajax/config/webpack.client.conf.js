@@ -11,11 +11,6 @@ module.exports = merge(base, {
         client: path.resolve(__dirname, '../src/entry-client.js')
     },
 
-    output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: 'bundle.js'
-    },
-
     plugins: [    
 
         new HtmlWebpackPlugin({

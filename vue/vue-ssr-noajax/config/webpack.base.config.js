@@ -1,17 +1,14 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-console.log(path.resolve(__dirname, '../dist'))
 
 module.exports = {
     // mode: 'development',
-
-    entry: './src/app.js',
-
+    resolve: {
+        extensions : ['.js', '.vue']
+    },
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: 'bundle.js'
+        filename: '[name]bundle.js'
     },
 
     module: {
@@ -42,15 +39,6 @@ module.exports = {
     },
 
     plugins: [    
-        new VueLoaderPlugin(),
-
-        new HtmlWebpackPlugin({
-            template: './src/index.html'
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'styles/[name].css',
-            chunkFilename: 'styles/[name].css'
-        }),
-        
+        new VueLoaderPlugin()
     ]
 }

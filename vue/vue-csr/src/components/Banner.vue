@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<style lang="stylus" scoped>
+<style scoped>
     .header {
         background: green;
     }

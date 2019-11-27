@@ -1,0 +1,5 @@
+编译经验总结：
+1，App.js 是公用的 只导出 创建App的方法，不做挂载，
+浏览器端由入口文件entry.client.js来指定元素挂载
+node端入口文件entry.server.js不需要指定挂载
+2，新增index.ssr.html

@@ -18,7 +18,7 @@ function createStore() {
     },
 
     mutations: {
-      SET_BAR(state, data) {
+      'SET_BAR'(state, data) {
         state.bar = data;
       }
     },
@@ -26,6 +26,7 @@ function createStore() {
     actions: {
       fetchBar({ commit }) {
         return fetchBar().then((data) => {
+          console.log(data)
           commit('SET_BAR', data);
         }).catch((err) => {
           console.error(err);

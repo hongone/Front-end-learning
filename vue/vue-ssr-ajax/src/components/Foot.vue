@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        页脚       
+        <h1 @onClick="onHandleClick" >页脚</h1>       
     </div>
 </template>
 
@@ -9,3 +9,12 @@
         background: yellowgreen;
     }
 </style>
+<script>
+export default {
+    methods: {
+        onHandleClick() {
+            alert('foot')
+        }
+    }
+}
+</script>

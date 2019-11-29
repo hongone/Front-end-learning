@@ -19,8 +19,9 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader', 'postcss-loader']
+               // use: [process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+               //     'css-loader', 'postcss-loader']
+                use: ['vue-style-loader', 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.(jpg|jpeg|png|gif|svg)$/,

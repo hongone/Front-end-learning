@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <h1 @onClick="onHandleClick" >页脚</h1>       
+        <h1 @click="onHandleClick" >页脚</h1>       
     </div>
 </template>
 

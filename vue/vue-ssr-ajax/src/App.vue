@@ -1,7 +1,7 @@
 <template>
   <div>
     <banner></banner>
-    <foot />
+    <foot></foot>
   </div>
 </template>
 
@@ -13,6 +13,21 @@ import Foot from './components/Foot.vue';
 export default {
   components: {
     Banner, Foot
+  },
+  beforeCreate() {
+    console.log('App.vue beforeCreate');
+  },
+
+  created() {
+    console.log('App.vue created');
+  },
+
+  beforeMount() {
+    console.log('App.vue beforeMount');
+  },
+
+  mounted() {
+    console.log('App.vue mounted');
   }
 }
 </script>

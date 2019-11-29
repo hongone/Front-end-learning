@@ -1,19 +1,5 @@
 编译经验总结：
-1，css提取： webpack 4.0 不支持extract-text-webpack-plugin（已经废弃）,  用mini-css-extract-plugin代替
-
-2，new MiniCssExtractPlugin()要放在 new VueLoaderPlugin()后面 否则出错
-
-
-3，请只在生产环境下使用 CSS 提取，这将便于你在开发环境下进行热重载。
-{
-  test: /\.css$/,
-  use: [
-    process.env.NODE_ENV !== 'production'
-      ? 'vue-style-loader'
-      : MiniCssExtractPlugin.loader,
-    'css-loader'
-  ]
-}
-
-4，通过 --config 来指定 webpack 的配置文件
-"dev": "webpack-dev-server  --inline --progress --config config/webpack.conf.js",
+1，App.js 是公用的 只导出 创建App的方法，不做挂载，
+浏览器端由入口文件entry.client.js来指定元素挂载
+node端入口文件entry.server.js不需要指定挂载
+2，新增index.ssr.html

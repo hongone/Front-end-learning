@@ -19,6 +19,7 @@ function createStore() {
 
     mutations: {
       'SET_BAR'(state, data) {
+        console.log('SET_BAR', data);
         state.bar = data;
       }
     },
@@ -47,4 +48,4 @@ function createStore() {
 
 export default createStore;
 
-typeof window
+// typeof window

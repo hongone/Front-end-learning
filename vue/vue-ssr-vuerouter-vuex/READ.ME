@@ -1,0 +1,8 @@
+
+
+router/index.js中 的path路径一定要匹配 context.url ,否则就出现404，匹配到的控件为空数组。比如 context.url === '/bar'  那么path中就有 {path: '/bar', component: Bar}
+
+由于使用了vue-router 服务端入口文件 中执行控件中异步方法 需要return
+        if (component.asyncData) {
+          return component.asyncData({ store });
+        }

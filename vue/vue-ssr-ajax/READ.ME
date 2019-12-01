@@ -4,3 +4,10 @@
 获取到异步数据之后要如何塞回到组件内？
 
 服务器端渲染和浏览器端渲染组件经过的生命周期是有区别的，在服务器端，只会经历beforeCreate和created两个生命周期。因为SSR服务器直接吐出html字符串就好了，不会渲染DOM结构，所以不存在beforeMount和mounted的，也不会对其进行更新，所以也就不存在beforeUpdate和updated等。
+在App.vue里要定义id="app"
+<div id="app">...</div>
+
+需要 return store.dispatch('fetchBar')  才会出现 服务端 异步取数据 比App.vue的 beforeCreate和created早
+const fetchInitialData = ({ store }) => {
+    return store.dispatch('fetchBar');
+}

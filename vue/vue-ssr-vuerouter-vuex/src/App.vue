@@ -1,19 +1,14 @@
 <template>
   <div id="app">
-    <banner></banner>
-    <foot></foot>
+    <router-link to="/bar">Bar</router-link>
+    <router-link to="/foo">Foo</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Banner from './components/Banner.vue';
-import Foot from './components/Foot.vue';
-// import Bar from './components/Bar.vue';
 
 export default {
-  components: {
-    Banner, Foot
-  },
   beforeCreate() {
     console.log('App.vue beforeCreate');
   },

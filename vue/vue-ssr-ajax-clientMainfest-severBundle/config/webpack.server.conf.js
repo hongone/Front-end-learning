@@ -1,11 +1,14 @@
 const path = require('path');
 const merge = require('webpack-merge');
+const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 const base = require('./webpack.base.config');
-console.log(path.resolve(__dirname, '../dist'))
+
 
 module.exports = merge(base, {
     target: 'node',
+    devtool: '#source-map',
     entry: {
         server: path.resolve(__dirname, '../src/entry-server.js')
     },
@@ -13,7 +16,9 @@ module.exports = merge(base, {
     output: {
         libraryTarget: 'commonjs2'
     },
+    externals: [nodeExternals()],
     plugins: [    
+        new VueSSRServerPlugin(),
         new HtmlWebpackPlugin({
             template:  path.resolve(__dirname, '../src/index.ssr.html'),
             filename: 'index.ssr.html',

@@ -2,7 +2,9 @@ import { createApp } from './app.js';
 
 //要返回一个函数，该函数的作用是接收一个context参数，同时每次都返回一个新的根组件�?
 export default context => {
-  return new Promise((resolve, reject) => {
+
+  // return (new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
     const { app, store, App } = createApp();
 
     let components = App.components;

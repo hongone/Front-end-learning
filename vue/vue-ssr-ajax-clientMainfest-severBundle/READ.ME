@@ -1,0 +1,4 @@
+需要 return store.dispatch('fetchBar')  才会出现 服务端 异步取数据 比App.vue的 beforeCreate和created早
+const fetchInitialData = ({ store }) => {
+    return store.dispatch('fetchBar');
+}

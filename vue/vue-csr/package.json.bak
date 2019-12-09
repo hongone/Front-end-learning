@@ -9,8 +9,8 @@
     "start2": "http-server ./dist",
     "dev": "webpack-dev-server  --inline --progress --config config/webpack.conf.js",
     "build": "webpack --mode=production --inline --progress --config config/webpack.conf.js",
-    "prebuild": "node npmruncollect",
-    "predev": "node npmruncollect"
+    //"prebuild": "node npmruncollect"
+     "prebuild": "echo process.env.npm_lifecycle_event"
   },
   "author": "",
   "license": "ISC",

@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-       <h1 @click="onHandleClick">页头</h1>
+       <h1 @click="onHandleClick">页头1</h1>
        <h2>异步Ajax数据：</h2>
        <span>{{ msg }}</span>
     </div>

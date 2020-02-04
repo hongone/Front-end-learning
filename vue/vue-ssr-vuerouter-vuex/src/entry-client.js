@@ -1,6 +1,6 @@
 import { createApp } from './app.js';
 
-const { app } = createApp();
-
+const { app, router } = createApp();
 //挂载#app
 app.$mount('#app');
+

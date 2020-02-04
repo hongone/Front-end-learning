@@ -17,7 +17,8 @@ function createRouter(){
     ];
     
     const router = new Router({
-        mode: 'history',
+        // mode: 'history',
+        mode: 'hash',
         routes
     });
 

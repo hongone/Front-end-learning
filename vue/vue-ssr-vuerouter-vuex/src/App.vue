@@ -3,6 +3,7 @@
     <router-link to="/bar">Bar</router-link>
     <router-link to="/foo">Foo</router-link>
     <router-view></router-view>
+    <p>首页.</p>
   </div>
 </template>
 

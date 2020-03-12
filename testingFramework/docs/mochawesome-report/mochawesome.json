@@ -1,0 +1,79 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2018-09-12T23:13:18.374Z",
+    "end": "2018-09-12T23:13:18.423Z",
+    "duration": 49,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "9e2dc255-78ef-4816-8d7d-842e558603c1",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "65308c05-379b-49f6-964d-46c10c6e07bf",
+        "title": "node接口测试",
+        "fullFile": "/home/river8/Documents/test/service/router.spec.js",
+        "file": "/service/router.spec.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [
+          {
+            "title": "test接口测试文档",
+            "fullTitle": "node接口测试 test接口测试文档",
+            "timedOut": false,
+            "duration": 25,
+            "state": "passed",
+            "speed": "fast",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "request()\n.get(\"/test\")\n.expect(\"Content-Type\",/json/)\n.expect(200)\n.end(function (err,res) {\n    if(res.data == \"Hello River8\"){\n        done();\n    }else{\n        done(err);\n    }\n})",
+            "err": {},
+            "isRoot": false,
+            "uuid": "7613bdc0-2ce7-4b5f-a583-8db3eea3dc4a",
+            "isHook": false,
+            "skipped": false
+          }
+        ],
+        "suites": [],
+        "passes": [
+          "7613bdc0-2ce7-4b5f-a583-8db3eea3dc4a"
+        ],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 25,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2018
+}

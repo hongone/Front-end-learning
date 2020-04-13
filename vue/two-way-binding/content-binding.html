@@ -9,6 +9,9 @@
   <div id="app">
     <input type="text" v-model="text">
     {{ text }}
+    <p>{{ text }}</p>
+    <p>{{ text }}</p>
+    <p>{{ text }}</p>
   </div>
   <script>
       // var dom = nodeToFragment(document.getElementById('app'))
@@ -62,23 +65,31 @@
         var reg =/\{\{(.*)\}\}/;
         // 如果是元素节点
         if(node.nodeType === 1) {
-          // console.log(node.attributes)
-          var attr = node.attributes;
-          for(let i=0; i < attr.length; i++) {
-            if (attr[i].nodeName === 'v-model') {
-              // 看是与哪个数据相关
-              var name = attr[i].nodeValue;
-              node.addEventListener('input', function(e){
-                vm[name] = e.target.value;
-              })
-              node.value = vm[name];
-              node.removeAttribute('v-model');
-            }
+          // console.log(node.childNodes)
+          if(node.childNodes.length > 0) {
+            var dom = nodeToFragment(node, vm)
+            node.appendChild(dom)
+          }else {
+            var attr = node.attributes;
+            for(let i=0; i < attr.length; i++) {
+              if (attr[i].nodeName === 'v-model') {
+                // 看是与哪个数据相关
+                var name = attr[i].nodeValue;
+                node.addEventListener('input', function(e){
+                  vm[name] = e.target.value;
+                })
+                node.value = vm[name];
+                node.removeAttribute('v-model');
+                break;
+              }
+            }            
           }
+
         
         }
         // 文本节点
         if(node.nodeType === 3) {
+          // console.log(node.nodeValue)
           if(reg.test(node.nodeValue)) {
             var name = RegExp.$1;
             name = name.trim();
@@ -90,8 +101,12 @@
       }
       // 响应式监听函数
       function defineReactive(obj, key, val) {
+        var dep = new Dep();
         Object.defineProperty(obj, key, {
           get: function() {
+            if(Dep.target){
+              dep.addSub(Dep.target);
+            }
             return val
           },
           set: function(newVal) {
@@ -99,6 +114,8 @@
               return
             }
             val = newVal;
+
+            dep.notify();
 
           }
         })

@@ -20,15 +20,5 @@ Dep.prototype = {
     // })
     // console.log('batcher', Dep.prototype.batcher.queue.length)
     Dep.prototype.batcher.flush();
-  },
-  // flush(){
-  //   // console.log('Depflush')
-  //   Dep.prototype.batcher.flush();
-  //   this.flush = function(){
-  //     setTimeout(() => {
-  //       // console.log('setTimeout', batcher.queue)
-  //       Dep.prototype.batcher.flush();
-  //     })
-  //   }
-  // }
+  }
 }

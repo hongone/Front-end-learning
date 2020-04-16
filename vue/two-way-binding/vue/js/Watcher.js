@@ -3,7 +3,7 @@ function Watcher(vm, node, name, type){
 
   Dep.target = this;  // Dep.target是一个全局变量
   this.vm = vm;
-  this.uid = ++vm.uid;
+  this.uid = vm.$getuid();
   this.node = node;
   this.name = name;
   this.type = type;

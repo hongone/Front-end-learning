@@ -5,6 +5,7 @@ function Vue(options){
   this.uid = 0;
   observe(this.data, this)
   var id = options.el
-  var dom = nodeToFragment(document.getElementById(id), this);
+  // var dom = nodeToFragment(document.getElementById(id), this);
+  var dom = new Compile(document.getElementById(id), this);
   document.getElementById(id).appendChild(dom)
 }

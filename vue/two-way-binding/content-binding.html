@@ -17,7 +17,7 @@
       // var dom = nodeToFragment(document.getElementById('app'))
       // console.log(dom)
       // console.log(document.getElementById('app'))
-
+      //  主题
       function Dep(){
         this.subs = [];
       }
@@ -32,21 +32,26 @@
         }
       }
 
-      function Watcher(vm, node, name){
+      function Watcher(vm, node, name, type){
         Dep.target = this;  // Dep.target是一个全局变量
         this.vm = vm;
         this.node = node;
         this.name = name;
+        this.type = type;
         this.update();
         Dep.target = null;
       }
       Watcher.prototype = {
         update(){
           this.get();
-          this.node.nodeValue = this.value; // 这里是改变节点内容的关键
+          
+          this.node[this.type] = this.value; // 这里是改变节点内容的关键
+        },
+        cb: function() {
+          this.node[this.type] = this.value; // 这里是改变节点内容的关键
         },
         get(){
-          this.value = this.vm[this.name]; //  触发相应的get
+          this.value = this.vm[this.name]; //  触发相应观察者的get
         }
       }
 
@@ -54,13 +59,13 @@
         var fragment = document.createDocumentFragment();
         var child;
         while (child = node.firstChild) {
-          complie(child, vm);
+          complieElemnt(child, vm);
           fragment.appendChild(child)
         }
         return fragment
       }
-
-      function complie(node, vm) {
+      // 编译HTML元素
+      function complieElemnt(node, vm) {
         // 用来匹配{{ xxx }}中的xxx
         var reg =/\{\{(.*)\}\}/;
         // 如果是元素节点
@@ -78,8 +83,10 @@
                 node.addEventListener('input', function(e){
                   vm[name] = e.target.value;
                 })
-                node.value = vm[name];
+                // node.value = vm[name];
                 node.removeAttribute('v-model');
+                // 双向绑定
+                new Watcher(vm, node, name, 'value');
                 break;
               }
             }            
@@ -94,12 +101,12 @@
             var name = RegExp.$1;
             name = name.trim();
             // node.nodeValue = vm[name];
-            new Watcher(vm, node, name);
+            new Watcher(vm, node, name, 'nodeValue');
             
           }
         }
       }
-      // 响应式监听函数
+      // 响应式监听函数  告诉主题什么时候添加观察者，什么时候通知观察者
       function defineReactive(obj, key, val) {
         var dep = new Dep();
         Object.defineProperty(obj, key, {

@@ -7,16 +7,14 @@ function Batcher(){
 
 Batcher.prototype.push = function (job) {
   // console.log('job',job)
-  if(!this.has[job.uid]) {
+  if(typeof this.has[job.uid] === 'undefined') {
     this.queue.push(job);
     this.has[job.uid] = job;
+    // console.log(this.queue)
     if(!this.waiting) {
       this.waiting = true;
-     // console.log(this.queue)
-    // setTimeout(() => {
-    //   console.log('setTimeout', this.queue)
-    //   this.flush();
-    // })     
+      // 利用同步队列 比 异步队列执行早的机制 来实现只执行一次flush
+      this.flush();
     }
 
   }
@@ -32,10 +30,11 @@ Batcher.prototype.reset = function () {
  * 执行并清空事件队列 
  */
 Batcher.prototype.flush = function () {
-  this.sycflush();
+  
   if ("Promise" in window) {
     this.flush = function() {
       Promise.resolve().then( ()=> {
+          // console.log('flush')
           this.sycflush();
       })
     }
@@ -46,6 +45,7 @@ Batcher.prototype.flush = function () {
       }, 0);
     }
   }
+  this.flush();
 }
 
 Batcher.prototype.sycflush = function () {
@@ -53,5 +53,6 @@ Batcher.prototype.sycflush = function () {
     job.cb();
   });
   this.reset();
+  // console.log('sycflush')
 }
 

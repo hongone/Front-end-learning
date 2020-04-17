@@ -8,10 +8,11 @@ function Compile(node, vm) {
 Compile.prototype = {
   nodeToFragment(node, vm) {
     var fragment = this.interNodeToFragment(node, vm);
-
+ 
     // 第一次吐页面前批量更新
     vm.$deps.forEach(dep => {
       dep.notify();
+      dep.batcher.sycflush();
     });
     return fragment
   },

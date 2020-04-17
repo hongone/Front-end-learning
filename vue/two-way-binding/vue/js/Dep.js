@@ -19,6 +19,6 @@ Dep.prototype = {
     //   Dep.prototype.batcher.flush();
     // })
     // console.log('batcher', Dep.prototype.batcher.queue.length)
-    Dep.prototype.batcher.flush();
+    // Dep.prototype.batcher.flush();
   }
 }

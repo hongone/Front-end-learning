@@ -3,14 +3,12 @@ function Dep(){
   this.subs = [];
 }
 Dep.prototype = {
-  batcher: new Batcher(),
   addSub(sub){
     this.subs.push(sub);
   },
   notify(){
     this.subs.forEach(function(sub){
       sub.update();
-      Dep.prototype.batcher.push(sub);
     })
     // console.log('setTimeout', this.subs)
     // batcher.flush()

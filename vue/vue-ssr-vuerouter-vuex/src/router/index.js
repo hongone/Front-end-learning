@@ -1,11 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import index from '../components/index.vue';
 import Bar from '../components/Bar.vue';
 
 Vue.use(Router);
 
 function createRouter(){
     const routes = [
+        {
+            path: '/',
+            component: index
+        },
         {
             path: '/bar',
             component: Bar
@@ -17,8 +22,8 @@ function createRouter(){
     ];
     
     const router = new Router({
-        // mode: 'history',
-        mode: 'hash',
+        mode: 'history',
+        // mode: 'hash',
         routes
     });
 

@@ -2,7 +2,7 @@
 function Vue(options){
   var uid = 0;
   this.data = options.data
-  this.$deps =[];
+  // this.$deps =[];
   this.$getuid = function(){
     return ++uid;
   };
@@ -11,5 +11,6 @@ function Vue(options){
   // var dom = nodeToFragment(document.getElementById(id), this);
   var dom = new Compile(document.getElementById(id), this);
   document.getElementById(id).appendChild(dom)
-  console.log(document.getElementById(id).innerHTML)
+  // console.log(document.getElementById(id).innerHTML)
+  // console.log(document.getElementById('a').value)
 }

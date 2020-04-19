@@ -53,6 +53,5 @@ Batcher.prototype.sycflush = function () {
     job.cb();
   });
   this.reset();
-  // console.log('sycflush')
 }
 

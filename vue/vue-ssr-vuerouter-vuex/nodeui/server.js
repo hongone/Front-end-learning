@@ -21,7 +21,7 @@ const renderer = createBundleRenderer(serverBundle, {
 
 
 // 后端Server
-backendApp.use(serve(path.resolve(__dirname, '../dist')));
+
 
 // backendRouter.get('/index', (ctx, next) => {
 //   // 这里用 renderToString 的 promise 返回的 html 有问题，没有样式
@@ -63,8 +63,8 @@ backendApp.use(serve(path.resolve(__dirname, '../dist')));
 //   }
 // });
 backendRouter.get('*', (ctx, next) => {
-  console.log('ctx', ctx);
-  console.log('url', ctx.url);
+  // console.log('ctx', ctx);
+  // console.log('url', ctx.url);
 
   let context = {
     url: ctx.url
@@ -80,30 +80,31 @@ backendRouter.get('*', (ctx, next) => {
 
 });
   
+backendApp.use(serve(path.resolve(__dirname, '../dist')));
 
 backendApp
   .use(backendRouter.routes())
   .use(backendRouter.allowedMethods());
 
-  backendApp.listen(3000, () => {
-    console.log('服务器端渲染地址： http://localhost:3000');
-  });
+backendApp.listen(3001, () => {
+  console.log('服务器端渲染地址： http://localhost:3001');
+});
   
   
-  // 前端Server
-  frontendRouter.get('/index', (ctx, next) => {
-    let html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8');
-    ctx.type = 'html';
-    ctx.status = 200;
-    ctx.body = html;
-  });
+// // 前端Server
+// frontendRouter.get('/index', (ctx, next) => {
+//   let html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8');
+//   ctx.type = 'html';
+//   ctx.status = 200;
+//   ctx.body = html;
+// });
   
-  frontendApp.use(serve(path.resolve(__dirname, '../dist')));
-  
-  frontendApp
-    .use(frontendRouter.routes())
-    .use(frontendRouter.allowedMethods());
-  
-  frontendApp.listen(3001, () => {
-    console.log('浏览器端渲染地址： http://localhost:3001');
-  });
+// frontendApp.use(serve(path.resolve(__dirname, '../dist')));
+
+// frontendApp
+//   .use(frontendRouter.routes())
+//   .use(frontendRouter.allowedMethods());
+
+// frontendApp.listen(3001, () => {
+//   console.log('浏览器端渲染地址： http://localhost:3001');
+// });

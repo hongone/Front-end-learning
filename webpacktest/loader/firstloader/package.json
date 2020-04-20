@@ -1,0 +1,19 @@
+{
+  "name": "loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "loader-utils": "^2.0.0",
+    "schema-utils": "^2.6.6",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}

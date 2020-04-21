@@ -35,7 +35,7 @@ module.exports = function(source) {
     const tables = $('el-table');
     
     tables.each(function(index, el) {
-
+      console.log($(this).attr('show-summary'))
       var refValue = undefined
       refValue = $(this).attr('ref') ? $(this).attr('ref') : 'etable_' + index;
       if (!$(this).attr('ref')){

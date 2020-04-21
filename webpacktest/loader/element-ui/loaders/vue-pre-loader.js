@@ -25,8 +25,8 @@ module.exports = function(source) {
    
     const tableRefs = [];
     const regT = /<template>([\s\S]*)<\/template>/g
-    const regS = /<script>([\s\S]*)<\/script>/g
     // const reg2 = /<template>[\s\S]*<\/template>/
+    const regS = /<script>([\s\S]*)<\/script>/g
     // const reg = /(.*?)/g
 
     // 模板处理块
@@ -54,7 +54,7 @@ module.exports = function(source) {
     const newTemplate = '<template>' + $('body').html() + '</template>'
     // console.log(newTemplate)
     // console.log(source.replace(reg2, newTemplate))
-    source = source.replace(reg2, newTemplate)
+    source = source.replace(regT, newTemplate)
 
     // 脚本处理块
     regS.test(source)

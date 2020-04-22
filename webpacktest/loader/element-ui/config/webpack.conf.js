@@ -36,10 +36,22 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                use: ['vue-loader',{
-                    loader: 'vue-pre-loader'
-                }]
+                use: ['vue-loader',
+                    {
+                        loader: 'vue-pre-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.(ttf|woff)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
             }
+
         ]
     },
     resolveLoader: {

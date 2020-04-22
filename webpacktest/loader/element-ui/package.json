@@ -10,11 +10,13 @@
     "dev": "webpack-dev-server  --inline --progress --config config/webpack.conf.js",
     "build": "webpack --mode=production --inline --progress --config config/webpack.conf.js",
     "prebuild": "node npmruncollect",
-    "predev": "node npmruncollect"
+    "predev": "node npmruncollect",
+    "babel-v": "babel -V"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.7.4",
     "@babel/parser": "^7.9.4",
     "@babel/preset-env": "^7.7.4",
@@ -23,6 +25,7 @@
     "autoprefixer": "^9.7.2",
     "babel-loader": "^8.0.6",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "babel-preset-stage-0": "^6.24.1",
     "cheerio": "^1.0.0-rc.3",
     "css-loader": "^3.2.0",
     "element-ui": "^2.13.1",

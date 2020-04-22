@@ -123,30 +123,75 @@ module.exports = function(source) {
     // 脚本处理块
     const regS = /<script>([\s\S]*)<\/script>/g
     newString = ''
+    // console.log(regS.test(source))
     if(!regS.test(source)){
       tableRefs.map(val => {
-        // console.log(val.replaceTag)
-        // console.log(val.newString)
-        // console.log(newString)
+        
         if(val.ref != ''){
           newString += 'this.$refs.' + val.ref + '.doLayout();\n';
         }
         // console.log(newString)
       })
-      if (newString != '') {
+      if (newString !== '') {
         newString = ' beforeUpdate() { \
           this.$nextTick(() => {  '
          + newString +
         '  }) \
         } ';
         newTemplate = '<script>' + newString + '</script>';
-    // console.log(source.replace(reg2, newTemplate))
         source = source.replace(regS, newTemplate)
       }
+      return source;
     }
    
-    // const scriptString = RegExp.$1;
-    // const $ = cheerio.load(RegExp.$1)
+    const scriptString = RegExp.$1;
+    // console.log(scriptString)
+    // npm i babel-preset-stage-0 -D
+    // npm i babel-preset-env -D
+    // let ast = parser.parse(scriptString)
+    // traverse(ast, {
+
+    //   ObjectExpression(path){
+    //     if(!t.isExportDefaultDeclaration(path.parent)){
+    //       return
+    //     }
+    //     console.log(t.propertyPath)
+    //     // let propertyPath = path.
+    //     // if (path.properties.some(val => val.key.name === 'beforeUpdate') === false) {
+
+    //     // }
+    
+    //     // t.isVariableDeclarator(path.parent)
+    //   }
+     
+    // })
+    const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
+    if(regBeforeUpdate.test(scriptString)){
+
+    }
+
+    tableRefs.map(val => {
+      if(val.ref !== ''){
+        newString += 'this.$refs.' + val.ref + '.doLayout();\n';
+      }
+      // console.log(newString)
+    })
+    if (newString !== '') {
+      newString = ' beforeUpdate() { \n \
+        this.$nextTick(() => {  \n '
+       + newString +
+      '  }) \n \
+      } ';
+      const regexport =  /export\s+default\s+\{/;
+      regexport.test(scriptString)
+      const exportString = RegExp.lastMatch;
+      // console.log(exportString)
+      newString = exportString + '\n' + newString +',\n';
+      newString = scriptString.replace(exportString, newString)
+      newTemplate = '<script>' + newString + '</script>';
+      // console.log(newTemplate)
+      source = source.replace(regS, newTemplate)
+    }
 
     console.log(source)
     return source;

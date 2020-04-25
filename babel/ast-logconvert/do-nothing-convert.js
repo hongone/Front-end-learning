@@ -9,20 +9,9 @@ function compile(code) {
 
   // 2,traverse 转换代码
   const visitor = {
-    CallExpression(path) {
-      const { callee } = path.node;
-
-      const isConsoleLog = types.isMemberExpression(callee) && callee.object.name === 'console' 
-        && callee.property.name === 'log'
-      if(isConsoleLog) {
-        const funcPath = path.findParent(p => {
-          return p.isFunctionDeclaration();
-        })
-      }
-
-    }
+   
   }
-  traverse.default(ast, {});
+  traverse.default(ast, visitor);
 
   // 3. generator 将 AST 转回成代码
   return generator.default(ast, {}, code);

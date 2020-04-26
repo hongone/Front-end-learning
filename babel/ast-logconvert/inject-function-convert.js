@@ -24,11 +24,14 @@ function compile(code) {
       let fntCode = `
         this.$nextTick(() => {  
           console.log('beforeUpdate')
-        }) 
+        });
       `;
-      let extraFntExpression = parser.parseExpression(fntCode)
+      // console.log(path)
+      // let injectExpression = parser.parseExpression(fntCode)
+      // 代码中有分号的要用parse 不能用parseExpression
+      let injectExpression = parser.parse(fntCode)
       // console.log(extraFntExpression)
-      path.node.body = body.unshift(extraFntExpression)
+      path.node.body.unshift(injectExpression)
 
 
     }

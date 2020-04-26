@@ -2,11 +2,11 @@
  const { getOptions } = require('loader-utils');
 // npm i -D schema-utils
 const validate = require('schema-utils');
-const cheerio = require('cheerio')
-const parser = require("@babel/parser")
-const traverse = require("@babel/traverse").default
-const t = require("@babel/types")
-const core = require("@babel/core")
+// const cheerio = require('cheerio')
+const generator = require("@babel/generator");
+const parser = require("@babel/parser");
+const traverse = require("@babel/traverse");
+const types = require("@babel/types");
  
 const schema = {
   'type': 'object',
@@ -144,54 +144,94 @@ module.exports = function(source) {
       return source;
     }
    
-    const scriptString = RegExp.$1;
-    // console.log(scriptString)
-    // npm i babel-preset-stage-0 -D
-    // npm i babel-preset-env -D
-    // let ast = parser.parse(scriptString)
-    // traverse(ast, {
-
-    //   ObjectExpression(path){
-    //     if(!t.isExportDefaultDeclaration(path.parent)){
-    //       return
-    //     }
-    //     console.log(t.propertyPath)
-    //     // let propertyPath = path.
-    //     // if (path.properties.some(val => val.key.name === 'beforeUpdate') === false) {
-
-    //     // }
     
-    //     // t.isVariableDeclarator(path.parent)
+    //**正则已实现但不完整 */
+    // const scriptString = RegExp.$1;
+    // 
+    // const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
+    // if(regBeforeUpdate.test(scriptString)){
+
+    // }
+
+    // tableRefs.map(val => {
+    //   if(val.ref !== ''){
+    //     newString += 'this.$refs.' + val.ref + '.doLayout();\n';
     //   }
-     
+    //   // console.log(newString)
     // })
-    const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
-    if(regBeforeUpdate.test(scriptString)){
-
-    }
-
-    tableRefs.map(val => {
-      if(val.ref !== ''){
-        newString += 'this.$refs.' + val.ref + '.doLayout();\n';
+    // if (newString !== '') {
+    //   newString = ' beforeUpdate() { \n \
+    //     this.$nextTick(() => {  \n '
+    //    + newString +
+    //   '  }) \n \
+    //   } ';
+    //   const regexport =  /export\s+default\s+\{/;
+    //   regexport.test(scriptString)
+    //   const exportString = RegExp.lastMatch;
+    //   // console.log(exportString)
+    //   newString = exportString + '\n' + newString +',\n';
+    //   newString = scriptString.replace(exportString, newString)
+    //   newTemplate = '<script>' + newString + '</script>';
+    //   // console.log(newTemplate)
+    //   source = source.replace(regS, newTemplate)
+    // }
+    // 正则End
+    const scriptString = RegExp.$1;
+    let injectCode = ''
+ 
+    tableRefs.map(val => {       
+      if(val.ref != ''){
+        injectCode += 'this.$refs.' + val.ref + '.doLayout();\n';
       }
-      // console.log(newString)
     })
-    if (newString !== '') {
-      newString = ' beforeUpdate() { \n \
-        this.$nextTick(() => {  \n '
-       + newString +
-      '  }) \n \
-      } ';
-      const regexport =  /export\s+default\s+\{/;
-      regexport.test(scriptString)
-      const exportString = RegExp.lastMatch;
-      // console.log(exportString)
-      newString = exportString + '\n' + newString +',\n';
-      newString = scriptString.replace(exportString, newString)
-      newTemplate = '<script>' + newString + '</script>';
-      // console.log(newTemplate)
-      source = source.replace(regS, newTemplate)
+    injectCode = ` beforeUpdate() { 
+      this.$nextTick(() => {  
+        ${injectCode}
+      }) 
+    } `;
+    
+    function compile(code) {
+      // 1.parse 将代码解析为抽象语法树（AST）
+      const options = {
+        // allowImportExportEverywhere: true,
+        sourceType: 'module'
+      }
+      const ast = parser.parse(code, options);
+    
+      // 2,traverse 转换代码
+      const visitor = {
+        BlockStatement(path) {
+          console.log(types.isFunctionDeclaration(path.parent))
+          if(!types.isFunctionDeclaration(path.parent)){
+            return
+          }
+          // console.log(path.parent)
+          let body = path.node.body;
+          console.log(typeof body,body.length)
+          let fntCode = `
+            this.$nextTick(() => {  
+              console.log('beforeUpdate')
+            });
+          `;
+          // console.log(path)
+          // let injectExpression = parser.parseExpression(fntCode)
+          // 代码中有分号的要用parse 不能用parseExpression
+          let injectExpression = parser.parse(fntCode)
+          // console.log(extraFntExpression)
+          path.node.body.unshift(injectExpression)
+    
+    
+        }
+      }
+      traverse.default(ast, visitor);
+    
+      // 3. generator 将 AST 转回成代码
+      return generator.default(ast, {}, code);
     }
+    
+    const code = scriptString;
+    const newCode = compile(code)
+    
 
     console.log(source)
     return source;

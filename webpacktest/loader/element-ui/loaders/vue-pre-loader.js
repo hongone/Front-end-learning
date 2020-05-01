@@ -16,6 +16,39 @@ const schema = {
     }
   }
 }
+function generateScript(tableRefs, options = {existsTag: true}){
+
+  let result = '';
+  if(!Array.isArray(tableRefs) || tableRefs.length === 0){
+    // return result;
+    return parser.parse(result);
+  }
+
+  tableRefs.map(val => {
+    if(val.ref != ''){
+      result += 'this.$refs.' + val.ref + '.doLayout();\n';
+    }
+  })
+
+  if (result !== '') {
+
+    if(!options.existsTag){
+      result = 'export default { \n \
+       beforeUpdate() { \n \
+        this.$nextTick(() => {  '
+       + result +
+      '  }) \
+        } \n\
+      } ';
+    }
+  }
+  // console.log(result)
+  return result;
+}
+function generateExpression(tableRefs, options = {existsTag: true}){
+  // console.log(result)
+  return parser.parse(generateScript(tableRefs,options));
+}
 
 module.exports = function(source) {
     const options = getOptions(this);
@@ -125,114 +158,96 @@ module.exports = function(source) {
     newString = ''
     // console.log(regS.test(source))
     if(!regS.test(source)){
-      tableRefs.map(val => {
-        
-        if(val.ref != ''){
-          newString += 'this.$refs.' + val.ref + '.doLayout();\n';
+      newString = generateScript(tableRefs, {existsTag: false})
+      newTemplate = '\n<script>' + newString + '</script>';
+      source = source + newTemplate;
+    }else{
+      //**正则已实现但不完整 */
+      // const scriptString = RegExp.$1;
+      // 
+      // const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
+      // if(regBeforeUpdate.test(scriptString)){
+
+      // }
+
+      // tableRefs.map(val => {
+      //   if(val.ref !== ''){
+      //     newString += 'this.$refs.' + val.ref + '.doLayout();\n';
+      //   }
+      //   // console.log(newString)
+      // })
+      // if (newString !== '') {
+      //   newString = ' beforeUpdate() { \n \
+      //     this.$nextTick(() => {  \n '
+      //    + newString +
+      //   '  }) \n \
+      //   } ';
+      //   const regexport =  /export\s+default\s+\{/;
+      //   regexport.test(scriptString)
+      //   const exportString = RegExp.lastMatch;
+      //   // console.log(exportString)
+      //   newString = exportString + '\n' + newString +',\n';
+      //   newString = scriptString.replace(exportString, newString)
+      //   newTemplate = '<script>' + newString + '</script>';
+      //   // console.log(newTemplate)
+      //   source = source.replace(regS, newTemplate)
+      // }
+      // 正则End
+      const scriptString = RegExp.$1;
+      
+      function compile(code) {
+        // 1.parse 将代码解析为抽象语法树（AST）
+        const options = {
+          // allowImportExportEverywhere: true,
+          sourceType: 'module'
         }
-        // console.log(newString)
-      })
-      if (newString !== '') {
-        newString = ' beforeUpdate() { \
-          this.$nextTick(() => {  '
-         + newString +
-        '  }) \
-        } ';
-        newTemplate = '<script>' + newString + '</script>';
-        source = source.replace(regS, newTemplate)
-      }
-      return source;
-    }
-   
-    
-    //**正则已实现但不完整 */
-    // const scriptString = RegExp.$1;
-    // 
-    // const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
-    // if(regBeforeUpdate.test(scriptString)){
-
-    // }
-
-    // tableRefs.map(val => {
-    //   if(val.ref !== ''){
-    //     newString += 'this.$refs.' + val.ref + '.doLayout();\n';
-    //   }
-    //   // console.log(newString)
-    // })
-    // if (newString !== '') {
-    //   newString = ' beforeUpdate() { \n \
-    //     this.$nextTick(() => {  \n '
-    //    + newString +
-    //   '  }) \n \
-    //   } ';
-    //   const regexport =  /export\s+default\s+\{/;
-    //   regexport.test(scriptString)
-    //   const exportString = RegExp.lastMatch;
-    //   // console.log(exportString)
-    //   newString = exportString + '\n' + newString +',\n';
-    //   newString = scriptString.replace(exportString, newString)
-    //   newTemplate = '<script>' + newString + '</script>';
-    //   // console.log(newTemplate)
-    //   source = source.replace(regS, newTemplate)
-    // }
-    // 正则End
-    const scriptString = RegExp.$1;
-    let injectCode = ''
- 
-    tableRefs.map(val => {       
-      if(val.ref != ''){
-        injectCode += 'this.$refs.' + val.ref + '.doLayout();\n';
-      }
-    })
-    injectCode = ` beforeUpdate() { 
-      this.$nextTick(() => {  
-        ${injectCode}
-      }) 
-    } `;
-    
-    function compile(code) {
-      // 1.parse 将代码解析为抽象语法树（AST）
-      const options = {
-        // allowImportExportEverywhere: true,
-        sourceType: 'module'
-      }
-      const ast = parser.parse(code, options);
-    
-      // 2,traverse 转换代码
-      const visitor = {
-        BlockStatement(path) {
-          console.log(types.isFunctionDeclaration(path.parent))
-          if(!types.isFunctionDeclaration(path.parent)){
-            return
+        const ast = parser.parse(code, options);
+      
+        // 2,traverse 转换代码
+        const visitor = {
+          ObjectExpression(path) {
+            // console.log(types.isExportDefaultDeclaration(path.parent))
+            if(!types.isExportDefaultDeclaration(path.parent)){
+              return
+            }
+            // console.log(path.parent)
+            
+            let properties = path.node.properties;
+            // console.log(typeof properties,properties.length);
+            let fntNode = null;
+            for(let i=0; i < properties.length; i++){
+              if(properties[i].type === 'ObjectMethod' && properties[i].kind === 'method' && properties[i].key.name === 'beforeUpdate'){
+                fntNode = properties[i];
+                break;
+              }
+            }
+            const injectExpression = generateExpression(tableRefs, {existsTag: true})
+            // console.log(typeof injectExpression.program.body);
+            // console.log(injectExpression);
+            // 不存在 beforeUpdate时
+            if(fntNode === null){
+              // let injectExpression = parser.parse(injectCode);
+              let expression = types.objectMethod("method", types.identifier('beforeUpdate'), [], types.blockStatement(injectExpression.program.body, []), false, false, false);
+              // console.log(expression)
+              properties.unshift(expression);
+            }else{
+              fntNode.body.unshift(injectExpression);
+            }
           }
-          // console.log(path.parent)
-          let body = path.node.body;
-          console.log(typeof body,body.length)
-          let fntCode = `
-            this.$nextTick(() => {  
-              console.log('beforeUpdate')
-            });
-          `;
-          // console.log(path)
-          // let injectExpression = parser.parseExpression(fntCode)
-          // 代码中有分号的要用parse 不能用parseExpression
-          let injectExpression = parser.parse(fntCode)
-          // console.log(extraFntExpression)
-          path.node.body.unshift(injectExpression)
-    
-    
         }
+        traverse.default(ast, visitor);
+      
+        // 3. generator 将 AST 转回成代码
+        return generator.default(ast, {}, code);
       }
-      traverse.default(ast, visitor);
-    
-      // 3. generator 将 AST 转回成代码
-      return generator.default(ast, {}, code);
+      
+  
+      newString = compile(scriptString).code;
+      // console.log(newString)
+      newTemplate = '<script>' + newString + '</script>';
+      source = source.replace(regS, newTemplate);
     }
-    
-    const code = scriptString;
-    const newCode = compile(code)
-    
 
-    console.log(source)
+    // console.log(source)
     return source;
 };

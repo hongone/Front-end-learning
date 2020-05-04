@@ -1,12 +1,19 @@
 // npm i -D loader-utils
- const { getOptions } = require('loader-utils');
+const { getOptions } = require('loader-utils');
 // npm i -D schema-utils
 const validate = require('schema-utils');
+const md5 = require('md5-node');
+const compiler = require('vue-template-compiler')
+
+
 // const cheerio = require('cheerio')
 const generator = require("@babel/generator");
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse");
 const types = require("@babel/types");
+
+const TemplateTransform = require('../utilty/vue-template-transform')
+
  
 const schema = {
   'type': 'object',
@@ -51,160 +58,186 @@ function generateExpression(tableRefs, options = {existsTag: true}){
 }
 
 module.exports = function(source) {
-    const options = getOptions(this);
-    // console.log('--s')
-    // console.log(source)
-    // 在这里写转换 source 的逻辑 ...
-    const regTag = /<el-table\s/g
-    if (regTag.test(source) === false) {
-      // console.log('false')
-      return source;
-    }
-    const tableRefs = [];
-    const regT = /<template>([\s\S]*)<\/template>/g
-    // const reg2 = /<template>[\s\S]*<\/template>/
-   
-    // const reg = /(.*?)/g
+  const parsed = compiler.parseComponent(source);
+  // console.log(parsed);
+  const { ast } = compiler.compile(parsed.template.content);
+  // console.log(compiler.compile(parsed.template.content).ast);
+  // console.log(parsed.template.script);
+  // compile(this.code).ast
 
-    // 模板处理块
+  // const TemplateTransform = require('vue-template-transformer')
+  // const templateTransformer = new TemplateTransform()
 
-    if (regT.test(source) === false) {
-      return source;
+// // extend the base template transform
+// class NewTemplateTransform extends TemplateTransform {
+//   genVIf (node) {
+//     // do something for v-if directive
+//   },
+//   genVFor (node) {
+//     // do something for v-for directive
+//   }
+// }
+
+// // get an instance
+// const newTemplateTranformer = new NewTemplateTransform({
+//   // some options
+//   prefix: 'foo'
+// })
+
+// inject the origin vue template ast and call generate method of transformer instance to get the transformed template
+// const { code } = templateTransformer.generate(ast)
+// console.log(code)
+// console.log(ast)
+
+
+  const options = getOptions(this);
+  // 在这里写转换 source 的逻辑 ...
+  const regTag = /<el-table\s/g
+  
+  const regT = /<template>([\s\S]*)<\/template>/g
+
+  // 模板处理块
+  if (regT.test(source) === false) {
+    return source;
+  }
+
+  const htmlString = RegExp.$1;
+  let newString = htmlString;
+  
+  let origin = ''
+  let props = ''
+  
+  let index = 0;
+  //先去除注释的html标签
+  const comments = [];
+  const regComment = /<!--[\s\S]*?-->/;
+  while(regComment.test(newString)) {
+    index++;
+    props = RegExp.lastMatch
+    const hastag = md5(props +` comment_${index}`);
+    const obj = {
+      origin: props,
+      replaceMark: '\$el\$' + hastag + index
     }
-    // cheerio 不支持自定义自闭合标签
-    // // {decodeEntities: false}解决中文乱码问题
-    // const $ = cheerio.load(RegExp.$1, {decodeEntities: false})
-    // const tables = $('el-table');
-    
-    // tables.each(function(index, el) {
-    //   console.log($(this).attr('show-summary'))
-    //   var refValue = undefined
-    //   refValue = $(this).attr('ref') ? $(this).attr('ref') : 'etable_' + index;
-    //   if (!$(this).attr('ref')){
-    //     $(this).attr('ref', refValue) 
+    newString = newString.replace(obj.origin, obj.replaceMark);
+    comments.push(obj);
+  }
+
+  const regTable = /<el-table([^>]*?show\-summary[^>]*?)>/
+  const regShow = /(\sshow\-summary\s|\s:show\-summary="true"\s)/
+  const regRef = /\sref="([^"]+)"\s/
+
+  const tableRefs = [];
+  index =0;
+  let ref=''
+  while(regTable.test(newString)) {
+    index++;
+    props = RegExp.$1
+    const hastag = md5(props +` eltable_${index}`);
+    const obj = {
+      origin: RegExp.lastMatch,
+      replaceMark: '\$el\$' + hastag + index,
+      newString: RegExp.lastMatch,
+      ref: ''
+    }
+    newString = newString.replace(obj.origin, obj.replaceMark)
+
+    ref = '';
+    if(regShow.test(props)) {
+      if(!regRef.test(props)){
+        ref = `eltable_${hastag}`
+        props += `\nref="${ref}" `
+      }else{
+        ref = RegExp.$1;
+      }
+    }
+    if(ref !== ''){
+      obj.ref = ref;
+      obj.newString = `<el-table${props}>`
+    }
+    tableRefs.push(obj)
+  }
+
+  if(tableRefs.length === 0) {
+    return source;
+  }
+  tableRefs.map(val => {
+    newString = newString.replace(val.replaceMark, val.newString)
+  })
+  comments.map(val => {
+    newString = newString.replace(val.replaceMark, val.origin)
+  })
+
+  let newTemplate = '<template>' + newString + '</template>'
+  source = source.replace(regT, newTemplate)
+
+
+  // 脚本处理块
+  const regS = /<script>([\s\S]*)<\/script>/g
+  newString = ''
+  // console.log(regS.test(source))
+  if(!regS.test(source)){
+    newString = generateScript(tableRefs, {existsTag: false})
+    newTemplate = '\n<script>' + newString + '</script>';
+    source = source + newTemplate;
+  }else{
+    //**正则已实现但不完整 */
+    // const scriptString = RegExp.$1;
+    // 
+    // const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
+    // if(regBeforeUpdate.test(scriptString)){
+
+    // }
+
+    // tableRefs.map(val => {
+    //   if(val.ref !== ''){
+    //     newString += 'this.$refs.' + val.ref + '.doLayout();\n';
     //   }
-    //   tableRefs.push(refValue)
-    //   console.log(refValue);
-    //   // console.log($(this).nodeName+':'+$(this).nodeValue);
-    // });
-
-    // const newTemplate = '<template>' + $('body').html() + '</template>'
-    // // console.log(newTemplate)
-    // // console.log(source.replace(reg2, newTemplate))
-    // source = source.replace(regT, newTemplate)
-
-    const htmlString = RegExp.$1;
-    const regTable = /<el-table([^>]*?show\-summary[^>]*?)>/
-    const regShow = /(\sshow\-summary\s|\s:show\-summary="true"\s)/
-    const regRef = /\sref="([^"]+)"\s/
-    // var n = htmlString.search(regTable);
-    // console.log('n', n)
-    // console.log(regTable.test(htmlString))
-    let tableString = ''
-    let props = ''
-    regTable.test(htmlString)
-    let newString = htmlString;
-    let index =0;
-    let ref=''
-    while(regTable.test(newString)) {
-      index++;
-      props = RegExp.$1
-      const obj = {
-        tableString: RegExp.lastMatch,
-        replaceTag: '\$el\$' + index,
-        newString: RegExp.lastMatch,
-        ref: ''
+    //   // console.log(newString)
+    // })
+    // if (newString !== '') {
+    //   newString = ' beforeUpdate() { \n \
+    //     this.$nextTick(() => {  \n '
+    //    + newString +
+    //   '  }) \n \
+    //   } ';
+    //   const regexport =  /export\s+default\s+\{/;
+    //   regexport.test(scriptString)
+    //   const exportString = RegExp.lastMatch;
+    //   // console.log(exportString)
+    //   newString = exportString + '\n' + newString +',\n';
+    //   newString = scriptString.replace(exportString, newString)
+    //   newTemplate = '<script>' + newString + '</script>';
+    //   // console.log(newTemplate)
+    //   source = source.replace(regS, newTemplate)
+    // }
+    // 正则End
+    const scriptString = RegExp.$1;
+    
+    function compile(code) {
+      // 1.parse 将代码解析为抽象语法树（AST）
+      const options = {
+        // allowImportExportEverywhere: true,
+        sourceType: 'module'
       }
-      newString = newString.replace(obj.tableString, obj.replaceTag)
-      ref = '';
-      if(regShow.test(props)) {
-        if(!regRef.test(props)){
-          ref = `eltable_${index}`
-          props += `\nref="${ref}" `
-        }else{
-          ref = RegExp.$1;
+      const ast = parser.parse(code, options);
+    
+      // 2,traverse 转换代码
+      
+      // 是否存在 export default语句
+      let hasExportDefaultDeclaration = false;
+      // 定义访问者
+      let visitor = {
+        ExportDefaultDeclaration(path){
+          hasExportDefaultDeclaration = true;
         }
       }
-      if(ref != ''){
-        obj.ref = ref;
-        obj.newString = `<el-table${props}>`
-      }
-      tableRefs.push(obj)
+      traverse.default(ast, visitor);
+      if(!hasExportDefaultDeclaration){
+        return generateScript(tableRefs, {existsTag: false}) + '\n' + code;
+      }else{
 
-    }
-    tableRefs.map(val => {
-      // console.log(val.replaceTag)
-      // console.log(val.newString)
-      // console.log(newString)
-      newString = newString.replace(val.replaceTag, val.newString)
-      // console.log(newString)
-    })
-    // console.log(newString)
-    // console.log(RegExp.$1) 
-    // console.log('RegExp.lastMatch', RegExp.lastMatch) 
-
-    // regShow.test(RegExp.$1)
-    // console.log(RegExp.$1) 
-    // console.log('RegExp.lastMatch', RegExp.lastMatch) 
-    // console.log(RegExp.$3) 
-    // console.log(RegExp.$4) 
-    let newTemplate = '<template>' + newString + '</template>'
-    // console.log(source.replace(reg2, newTemplate))
-    source = source.replace(regT, newTemplate)
-
-
-    // 脚本处理块
-    const regS = /<script>([\s\S]*)<\/script>/g
-    newString = ''
-    // console.log(regS.test(source))
-    if(!regS.test(source)){
-      newString = generateScript(tableRefs, {existsTag: false})
-      newTemplate = '\n<script>' + newString + '</script>';
-      source = source + newTemplate;
-    }else{
-      //**正则已实现但不完整 */
-      // const scriptString = RegExp.$1;
-      // 
-      // const regBeforeUpdate = /\sbeforeUpdate\(\)\s*\{([^}]*?)\}/g
-      // if(regBeforeUpdate.test(scriptString)){
-
-      // }
-
-      // tableRefs.map(val => {
-      //   if(val.ref !== ''){
-      //     newString += 'this.$refs.' + val.ref + '.doLayout();\n';
-      //   }
-      //   // console.log(newString)
-      // })
-      // if (newString !== '') {
-      //   newString = ' beforeUpdate() { \n \
-      //     this.$nextTick(() => {  \n '
-      //    + newString +
-      //   '  }) \n \
-      //   } ';
-      //   const regexport =  /export\s+default\s+\{/;
-      //   regexport.test(scriptString)
-      //   const exportString = RegExp.lastMatch;
-      //   // console.log(exportString)
-      //   newString = exportString + '\n' + newString +',\n';
-      //   newString = scriptString.replace(exportString, newString)
-      //   newTemplate = '<script>' + newString + '</script>';
-      //   // console.log(newTemplate)
-      //   source = source.replace(regS, newTemplate)
-      // }
-      // 正则End
-      const scriptString = RegExp.$1;
-      
-      function compile(code) {
-        // 1.parse 将代码解析为抽象语法树（AST）
-        const options = {
-          // allowImportExportEverywhere: true,
-          sourceType: 'module'
-        }
-        const ast = parser.parse(code, options);
-      
-        // 2,traverse 转换代码
-        const visitor = {
+        visitor = {
           ObjectExpression(path) {
             // console.log(types.isExportDefaultDeclaration(path.parent))
             if(!types.isExportDefaultDeclaration(path.parent)){
@@ -231,23 +264,24 @@ module.exports = function(source) {
               // console.log(expression)
               properties.unshift(expression);
             }else{
-              fntNode.body.unshift(injectExpression);
+              // console.log(fntNode)
+              fntNode.body.body.unshift(injectExpression);
             }
           }
         }
         traverse.default(ast, visitor);
       
         // 3. generator 将 AST 转回成代码
-        return generator.default(ast, {}, code);
+        return generator.default(ast, {}, code).code;
       }
-      
-  
-      newString = compile(scriptString).code;
-      // console.log(newString)
-      newTemplate = '<script>' + newString + '</script>';
-      source = source.replace(regS, newTemplate);
     }
+    newString = compile(scriptString);
 
-    // console.log(source)
-    return source;
+    // console.log(newString)
+    newTemplate = '<script>\n' + newString + '\n</script>';
+    source = source.replace(regS, newTemplate);
+  }
+
+    console.log(source)
+  return source;
 };

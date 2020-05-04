@@ -40,11 +40,11 @@ function generateScript(tableRefs, options = {existsTag: true}){
   if (result !== '') {
 
     if(!options.existsTag){
-      result = 'export default { \n \
-       beforeUpdate() { \n \
-        this.$nextTick(() => {  '
+      result = 'export default {\n\
+       beforeUpdate() {\n\
+        this.$nextTick(() => {\n'
        + result +
-      '  }) \
+      '  })\n\
         } \n\
       } ';
     }
@@ -58,6 +58,7 @@ function generateExpression(tableRefs, options = {existsTag: true}){
 }
 
 module.exports = function(source) {
+   // 在这里写转换 source 的逻辑 ...
   const parsed = compiler.parseComponent(source);
   // console.log(parsed);
   const { ast } = compiler.compile(parsed.template.content);
@@ -91,7 +92,7 @@ module.exports = function(source) {
 
 
   const options = getOptions(this);
-  // 在这里写转换 source 的逻辑 ...
+ 
   const regTag = /<el-table\s/g
   
   const regT = /<template>([\s\S]*)<\/template>/g
@@ -104,8 +105,9 @@ module.exports = function(source) {
   const htmlString = RegExp.$1;
   let newString = htmlString;
   
-  let origin = ''
+
   let props = ''
+  // let matchContent =''
   
   let index = 0;
   //先去除注释的html标签
@@ -113,17 +115,17 @@ module.exports = function(source) {
   const regComment = /<!--[\s\S]*?-->/;
   while(regComment.test(newString)) {
     index++;
-    props = RegExp.lastMatch
-    const hastag = md5(props +` comment_${index}`);
+    let matchContent = RegExp.lastMatch;
+    const hastag = md5(matchContent +` comment_${index}`);
     const obj = {
-      origin: props,
+      origin: matchContent,
       replaceMark: '\$el\$' + hastag + index
     }
     newString = newString.replace(obj.origin, obj.replaceMark);
     comments.push(obj);
   }
 
-  const regTable = /<el-table([^>]*?show\-summary[^>]*?)>/
+  const regTable = /<el-table(\s+[^>]*?show\-summary[^>]*?)>/
   const regShow = /(\sshow\-summary\s|\s:show\-summary="true"\s)/
   const regRef = /\sref="([^"]+)"\s/
 
@@ -133,9 +135,10 @@ module.exports = function(source) {
   while(regTable.test(newString)) {
     index++;
     props = RegExp.$1
-    const hastag = md5(props +` eltable_${index}`);
+    let matchContent = RegExp.lastMatch;
+    const hastag = md5(matchContent +` eltable_${index}`);
     const obj = {
-      origin: RegExp.lastMatch,
+      origin: matchContent,
       replaceMark: '\$el\$' + hastag + index,
       newString: RegExp.lastMatch,
       ref: ''
@@ -169,6 +172,7 @@ module.exports = function(source) {
   })
 
   let newTemplate = '<template>' + newString + '</template>'
+  console.log(newTemplate)
   source = source.replace(regT, newTemplate)
 
 
@@ -282,6 +286,6 @@ module.exports = function(source) {
     source = source.replace(regS, newTemplate);
   }
 
-    console.log(source)
+    // console.log(source)
   return source;
 };

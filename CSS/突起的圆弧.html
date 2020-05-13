@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title><style type="text/css">
+	#circle {
+  background-color:#CCC;
+  width:100px;
+  height:100px;
+  border-radius:50px 50px 50px 50px;
+  position:relative;
+  left:200px;
+  top:0px;
+  transform:rotate(45deg);
+  box-shadow:  85px -85px 0 #FFF, 50px -50px 0 #CCC, -85px 85px 0 #FFF, -50px 50px 0 #CCC;
+}
+#circle:before{
+  background-color:#FFF;
+  width:100px;
+  height:100px;
+  border-radius:50px;
+  position:absolute;
+  content: '';
+  left:-100px;
+  
+}
+#circle:after{
+  background-color:#FFF;
+  width:100px;
+  height:100px;
+  border-radius:0px 0px 50px 0px;
+  position:absolute;
+  content: '';
+  left:0px;
+  top:-100px;
+
+}
+#box{
+  background-color:#CCC;
+  width:300px;
+  height:200px;
+
+  position:relative;
+  left:100px;
+  top:-71px;
+ 
+}
+  </style>
+ </head>
+ <body>
+ <div id="p">
+    <div id="circle"></div>
+    <div id="box"></div>
+  </div>
+ </body>
+</html>

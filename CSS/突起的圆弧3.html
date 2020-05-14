@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+  body{
+    background-color: chocolate;
+  }
+  #p{
+    overflow: hidden;
+    height: 34px;
+    width: 150px;
+    margin: auto;
+  
+  }
+	#circle {
+    background-color:#CCC;
+    width:100px;
+    height:100px;
+    border-radius:100px;
+    position:relative;
+    left:25px;
+    top:0px;
+    transform:rotate(45deg);
+  /* box-shadow:  85px -85px 0 #FFF, 50px -50px 0 #CCC, -85px 85px 0 #FFF, -50px 50px 0 #CCC;*/
+  }
+  #circle:before{
+    /* background-color:#FFF; */
+    width:121px;
+    height:121px;
+    border-radius:100px;
+    position:absolute;
+    content: '';
+    left:-101px;
+    border-bottom: solid 20px #ccc;
+    box-sizing: border-box;
+    border-left: solid 20px #0000;
+    border-top: solid 20px #0000;
+    border-right: solid 20px #0000;
+    transform: rotate(-53deg);
+    
+  }
+  #circle:after{
+  
+    width: 121px;
+    height: 121px;
+    border-radius: 100px 100px 100px 100px;
+    position: absolute;
+    content: '';
+    left: 0px;
+    top: -101px;
+    border-bottom: solid 20px #ccc;
+    box-sizing: border-box;
+    border-left: solid 20px #0000;
+    border-top: solid 20px #0000;
+    border-right: solid 20px #0000;
+    transform: rotate(-37deg);
+
+  }
+  #box{
+    background-color:#CCC;
+
+    height:200px;
+
+    position:relative;
+  
+  
+  }
+  
+  </style>
+ </head>
+ <body>
+ <div id="p">
+    <div id="circle"></div>
+  </div>
+  <div id="box"></div>
+ </body>
+</html>

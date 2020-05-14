@@ -98,6 +98,9 @@ var isNumber = function(s){
     }
 
   }
+  if(plusCount===0 && minusCount===0 && ECount===0 && dotCount===0){
+    return true;
+  }
   
   let strArr = str.split('e');
   // console.log(strArr)
@@ -148,3 +151,5 @@ var isNumber = function(s){
   return true;
 
 }
+
+

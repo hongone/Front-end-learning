@@ -10,6 +10,9 @@
       margin: 0;
       padding: 0;
     }
+    html, body {
+      height: 100%;
+    }
     header,footer,main {
       display: block;
     }
@@ -32,9 +35,10 @@
       background-color: yellowgreen;
       position: absolute;
       top: 50px;
-      bottom: 30px;
-      width: 100%;
+      bottom: 34px;
+      /* width: 100%; */
       overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
       /* height: 622px; */
     }
 
@@ -79,7 +83,8 @@
 
     document.getElementById('clientHeight').value=document.documentElement.clientHeight;
     document.getElementById('innerHeight').value=window.innerHeight;
-    document.getElementById('main').style.height = '200px';
+    // document.getElementById('main').style.height = '200px';
+    document.getElementById('main').style.width = w=window.innerWidth + 'px';
     document.getElementById('footer').style.bottom = '400px';
     // alert(document.getElementById('main').style.height)
     getHeight()
@@ -95,7 +100,7 @@
     
     x=document.getElementById("demo");
     x.innerHTML = "浏览器的内部窗口宽度：" + w + "，高度：" + h + "。"
-    x.innerHTML += "<br>window.innerHeight：" + window.innerHeight + "。"
+    x.innerHTML += "<br>window.innerHeight：" + document.getElementById('main').style.width + "。"
     x.innerHTML += "<br>document.documentElement.clientHeight：" + document.documentElement.clientHeight + "。"
     x.innerHTML += "<br>document.body.clientHeight：" + document.body.clientHeight + "。"
     document.getElementById("demo2").innerHTML = x.innerHTML;

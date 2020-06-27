@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    header,footer,main {
+      display: block;
+    }
+    header{
+      position: fixed;
+      height: 50px;
+      left: 0;
+      right: 0;
+      top: 0;
+      background-color: tomato;
+      /* width: 100%; */
+
+    }
+    main {
+      /* background-color: yellowgreen;
+      height: 2000px;
+      word-wrap: break-word;
+      margin-top: 50px;
+      margin-bottom: 34px; */
+      background-color: yellowgreen;
+      position: absolute;
+      top: 50px;
+      bottom: 30px;
+      width: 100%;
+      overflow-y: scroll;
+      /* height: 622px; */
+    }
+
+
+    footer {
+      position: fixed;
+      left: 0;
+      /* bottom: 220px; */
+      bottom: 0;
+      right: 0;
+      /* background-color:violet; */
+      height: 34px;
+      width: 100%;
+    }
+
+    main .content{
+      background-color: yellowgreen;
+      /* height: 2000px; */
+    }
+  </style>
+</head>
+
+<body>
+  <header><div>header</div></header>
+  <main>
+    <div class="content" id="main">
+      main
+      <input type="text" name="" id="clientHeight">
+      <input type="text" name="" id="innerHeight">
+      
+      <p id="demo"></p>
+      
+    </div>
+  </main>
+  <footer>
+    <input type="text" name="fix" id="footer" onfocus="getHeight">footer
+    <p id="demo2"></p>
+  </footer>
+</body>
+<script>
+  window.onload = function() {
+
+    document.getElementById('clientHeight').value=document.documentElement.clientHeight;
+    document.getElementById('innerHeight').value=window.innerHeight;
+    document.getElementById('main').style.height = '200px';
+    document.getElementById('footer').style.bottom = '400px';
+    // alert(document.getElementById('main').style.height)
+    getHeight()
+  }
+  function getHeight(){
+    var w=window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth;
+    
+    var h=window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight;
+    
+    x=document.getElementById("demo");
+    x.innerHTML = "浏览器的内部窗口宽度：" + w + "，高度：" + h + "。"
+    x.innerHTML += "<br>window.innerHeight：" + window.innerHeight + "。"
+    x.innerHTML += "<br>document.documentElement.clientHeight：" + document.documentElement.clientHeight + "。"
+    x.innerHTML += "<br>document.body.clientHeight：" + document.body.clientHeight + "。"
+    document.getElementById("demo2").innerHTML = x.innerHTML;
+  }
+</script>
+
+</html>

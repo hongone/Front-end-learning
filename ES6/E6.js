@@ -33,3 +33,27 @@ console.log(food);
 	let p = a1 + a2;
 })();
 
+//继承
+class SupperClass{
+  constructor(x, y){
+    this.x=x;
+    this.y=y;
+  }
+  print1(){
+    console.log(this.x, this.y)
+  }
+  getXY(){
+    return {x: this.x, y: this.y}
+  } 
+}
+class MyClass extends SupperClass{
+  constructor(x,y,z){
+    super(x,y);
+    this.z=z;
+  }
+  print(){
+    console.log(this.x, this.y, this.z)
+  }
+}
+let myclass = new MyClass(1,2,3)
+myclass.print();

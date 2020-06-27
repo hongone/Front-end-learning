@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+	.test{
+		color: expression(alert('xss'))
+		background: url('javascript:alert(123)');
+
+	}
+		.test::after{
+			content: url('javascript:alert(123)');
+
+	}
+  </style>
+ </head>
+ <body >
+	<div class="test"></div>
+ </body>
+</html>

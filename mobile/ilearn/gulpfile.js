@@ -11,15 +11,17 @@ const cssFiles = './src/**/*.css';
  // 开发环境的gulp
 function builddev() {
   return watch([lessFiles,htmlFiles,cssFiles], { ignoreInitial: false },
-    () => {
-      src(htmlFiles)
-        .pipe(dest(distdDir));
-      src(cssFiles)
-        .pipe(dest(distdDir));
-      src(lessFiles)
+    () => {  
+      return src(lessFiles)
         .pipe(less())
         .pipe(dest(distdDir));
-      return 
+       
+    },()=>{
+        src(cssFiles)
+          .pipe(dest(distdDir));
+  },()=>{
+    return src(cssFiles)
+        .pipe(dest(distdDir));
   })
 }
 

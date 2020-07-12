@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 设置视口大小 device-width表示设备的宽度（完美视口） -->
+  <meta name="viewport" content="width=device-width">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      /* 
+         网页中字体大小最小是12px，不能设置一个比12像素还小的字体
+     如果我们设置了一个小于12px的字体，则字体自动设置为12
+     0.13333333vw =1px
+     5.3333vw=40px
+       */
+      /* font-size: 5.3333333333vw; */
+      font-size: 26.66vw;
+    }
+    .box1 {
+      width: 100vw;
+      height: 100px;
+      background-color: red;
+    }
+    .box2 {
+      /* width: 1.2rem; 
+      height: 0.875rem; */
+      width: .48rem; 
+      height: .35rem;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+</body>
+</html>

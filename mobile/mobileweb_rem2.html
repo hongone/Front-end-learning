@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 设置视口大小 device-width表示设备的宽度（完美视口） -->
+  <meta name="viewport" content="width=device-width">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      /* 
+         网页中字体大小最小是12px，不能设置一个比12像素还小的字体
+     如果我们设置了一个小于12px的字体，则字体自动设置为12
+
+     0.1333333333333333vw = 1px (设计图的像素)  
+     5.333333333333333vw = 40px(设计图的像素) = 100 / 750 * 40 px (浏览器计算大小)
+       */
+       font-size: 5.333333333333333vw; 
+    }
+    .box2 {
+      /* 
+      按比例计算
+      rem 
+       1 rem = 1 html的字体大小
+       1 rem = 40 px（设计图）
+       */
+      width: 18.75rem; 
+      height: 0.875rem;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="box2"></div>
+</body>
+</html>
+居中为什么要使用 transform（为什么不使用 marginLeft/marginTop） 
+请画出 css 盒模型，基于盒模型的原理，说明相对定位、绝对定位、浮动实现样式是如何实现的？
+

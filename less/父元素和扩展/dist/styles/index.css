@@ -1,0 +1,31 @@
+body div {
+  color: #CCC;
+  width: 200px;
+  height: 200px;
+}
+body p {
+  color: #BBB;
+}
+.box1 {
+  color: red;
+}
+.box1 > .box2 {
+  color: indigo;
+}
+.box1:hover {
+  color: greenyellow;
+}
+.button-ok {
+  background-color: greenyellow;
+}
+.button-cancel {
+  background-color: grey;
+}
+.p1,
+.p2 {
+  width: 100px;
+  height: 100px;
+}
+.p2 {
+  color: red;
+}

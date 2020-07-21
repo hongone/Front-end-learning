@@ -1,0 +1,37 @@
+body {
+  div {
+    color: #CCC;
+    width: 200px;
+    height: $width;
+  }
+  p{
+    color: #BBB;
+  }
+}
+.box1 {
+
+  color: red;
+  > .box2 {
+    color: indigo;
+  }
+  &:hover{
+    color: greenyellow;
+  }
+}
+.button{
+  &-ok {
+    background-color: greenyellow;
+  }
+  &-cancel {
+    background-color: grey;
+  }
+}
+.p1{
+  width: 100px;
+  height: 100px;
+}
+// 扩展
+.p2:extend(.p1){
+  color: red;
+}
+

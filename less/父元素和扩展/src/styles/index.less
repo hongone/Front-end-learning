@@ -18,7 +18,7 @@ body {
     color: greenyellow;
   }
 }
-.button{
+.button {
   &-ok {
     background-color: greenyellow;
   }
@@ -31,7 +31,56 @@ body {
   height: 100px;
 }
 // 扩展
+// :extend() 对当前选择器扩展指定选择器的样式（选择器分组）
 .p2:extend(.p1){
   color: red;
 }
 
+.p3{
+  // 相当于复制p1的样式
+  // mixin
+  .p1()
+}
+
+.box3{
+  width: 100px;
+  height: 100px;
+}
+
+.box4{
+  color: red;
+}
+// 扩展多个
+.box5:extend(.box3,.box4){
+  margin: 5px;
+}
+// mixin
+.box5{
+  .box3;
+  .box4;
+}
+// 默认值
+.test(@w:100px){
+  width: @w;
+}
+
+div{
+  .test(200px);
+}
+
+p{
+  .test();
+}
+
+@mybutton_bg_color: #bfa;
+.mybutton{
+  background-color: @mybutton_bg_color;
+  &:hover{
+    // darken 加深颜色
+    background-color: darken(@mybutton_bg_color, 20%);
+  }
+}
+// 计算运算符
+.box1 {
+  width: 100p + 100px;
+}

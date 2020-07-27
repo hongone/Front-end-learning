@@ -7,7 +7,10 @@ var less = require('gulp-less');
 // var uglify = require('gulp-uglify');
 // var rename = require('gulp-rename');
 // var cleanCSS = require('gulp-clean-css');
+
 var del = require('del');
+// 确保本地已安装gulp-sourcemaps [npm i gulp-sourcemaps --save-dev]
+var sourcemaps = require('gulp-sourcemaps');
 
 
 var paths = {
@@ -45,7 +48,9 @@ function clean() {
  */
 function lesses() {
   return gulp.src(paths.lesses.src)
+    .pipe(sourcemaps.init({largeFile: true}))
     .pipe(less())
+    .pipe(sourcemaps.write('../maps'))
     // .pipe(cleanCSS())
     // pass in options to the stream
     // .pipe(rename({

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <style>
+    .imglist{
+      position: relative;
+      width: 590px;
+      height: 470px;
+      margin: 100px auto;
+    }
+    .imglist li{
+      position: absolute;
+      
+    }
+    .imglist li:nth-child(2) {
+      z-index: 1;
+    }
+    .imglist .points{
+      z-index: 999;
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+    }
+    .points > a{
+      float: left;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 4px;
+      background-clip: content-box;
+      border: 2px solid transparent;
+      background-color: whitesmoke;
+  
+    }
+
+    .points a:active ,
+    .points a:hover{
+      background-color: #fff;
+      border: 2px solid #ffffff8e;
+    }
+  </style>
+</head>
+<body>
+  <ul class="imglist">
+    <li><img src="./images/1.jpg" alt="" srcset=""></li>
+    <li><img src="./images/2.jpg" alt="" srcset=""></li>
+    <li><img src="./images/3.jpg" alt="" srcset=""></li>
+    <li><img src="./images/4.jpg" alt="" srcset=""></li>
+    <li><img src="./images/5.jpg" alt="" srcset=""></li>
+    <li><img src="./images/6.jpg" alt="" srcset=""></li>
+    <li><img src="./images/7.jpg" alt="" srcset=""></li>
+    <div class="points">
+      <a class="active" href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+    </div>
+  </ul>
+ 
+</body>
+</html>

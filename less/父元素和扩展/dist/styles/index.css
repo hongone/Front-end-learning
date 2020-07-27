@@ -29,3 +29,41 @@ body p {
 .p2 {
   color: red;
 }
+.p3 {
+  width: 100px;
+  height: 100px;
+}
+.box3,
+.box5 {
+  width: 100px;
+  height: 100px;
+}
+.box4,
+.box5 {
+  color: red;
+}
+.box5 {
+  margin: 5px;
+}
+.box5 {
+  width: 100px;
+  height: 100px;
+  color: red;
+}
+div {
+  width: 200px;
+}
+p {
+  width: 100px;
+}
+.mybutton {
+  background-color: #bfa;
+}
+.mybutton:hover {
+  background-color: #69ff44;
+}
+.box1 {
+  width: 200p;
+}
+
+/*# sourceMappingURL=../maps/index.css.map */

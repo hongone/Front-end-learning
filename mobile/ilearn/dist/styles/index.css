@@ -1,5 +1,7 @@
 body div {
   color: #CCC;
+  width: 200px;
+  height: 200px;
 }
 body p {
   color: #BBB;

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        border: solid 2px red;
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 50px;
+      }
+
+      li {
+        width: 200px;
+        background-color: #bfa;
+        font-size: 50px;
+        text-align: center;
+        line-height: 100px;
+        list-style-type: none;
+        /* flex-grow: 1; */
+        flex-shrink: 0;
+      }
+      li:nth-child(1) {
+      }
+      li:nth-child(2) {
+        background-color: pink;
+      }
+
+      li:nth-child(3) {
+        background-color: orange;
+      }
+
+      li:nth-child(4) {
+        background-color: yellow;
+      }
+
+      li:nth-child(5) {
+        background-color: chocolate;
+      }
+      .u1 {
+        width: 500px;
+        /* flex-wrap:
+        设置弹性元素是否在弹性容器中自动换行
+        可选值:
+          nowrap默认值，元素不会自动换行
+          wrap元素沿着辅轴方向自动换行
+          wrap-reverse元素沿着辅轴反方向换行
+      */
+
+        flex-wrap: wrap-reverse;
+      }
+
+      .u2 {
+        width: 800px;
+        /*  
+            justify-content
+                - 如何分配主轴上的空白空间（主轴上的元素如何排列）
+                - 可选值：
+                    flex-start 元素沿着主轴起边排列
+                    flex-end 元素沿着主轴终边排列
+                    center 元素居中排列
+                    space-around 空白分布到元素两侧
+                    space-between 空白均匀分布到元素间
+                    space-evenly 空白分布到元素的单侧
+
+        */
+        justify-content: space-evenly;
+      }
+
+      .u3 {
+        width: 600px;
+        height: 800px;
+
+        flex-flow: row wrap;
+        /*
+             align-items: 
+                - 元素在辅轴上如何对齐
+                - 元素间的关系
+                    - 可选值：
+                        stretch 默认值，将元素的长度设置为相同的值
+                        flex-start 元素不会拉伸，沿着辅轴起边对齐
+                        flex-end 沿着辅轴的终边对齐
+                        center 居中对齐
+                        baseline 基线对齐
+             */
+        align-items: flex-start;
+        /* align-content: 辅轴空白空间的分布 */
+        /* align-content: space-between; */
+      }
+
+      .u4 {
+        width: 400px;
+        height: 400px;
+
+        justify-content: center;
+
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="u1">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <ul class="u2">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <ul class="u3">
+      <li>1</li>
+      <li>
+        2
+        <div>2</div>
+      </li>
+      <li>
+        3
+        <div>3</div>
+        <div>3</div>
+      </li>
+
+      <li>1</li>
+
+      <li>
+        2
+        <div>2</div>
+      </li>
+    </ul>
+    <ul class="u4">
+      <li>1</li>
+    </ul>
+  </body>
+</html>

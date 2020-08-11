@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      border: solid 2px red;
+      display: flex;
+      flex-direction: row;
+      width: 800px;
+    }
+    li {
+      width: 200px;
+      height: 100px;
+      background-color: #bfa;
+      font-size: 50px;
+      text-align: center;
+      line-height: 100px;
+      list-style-type: none;
+      /* flex-grow: 1; */
+      flex-shrink: 1;
+
+    }
+    li:nth-child(1) {
+      flex-grow: 1;
+    }
+    li:nth-child(2) {
+      background-color: pink;
+      flex-grow: 2;
+    }
+    li:nth-child(3) {
+      background-color: orange;
+      flex-grow: 3;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+</body>
+</html>

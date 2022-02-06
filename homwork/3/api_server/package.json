@@ -12,7 +12,7 @@
   "dependencies": {
     "async-mysql": "^1.0.1",
     "hapi": "^17.5.4",
-    "log4js": "^3.0.5",
+    "log4js": "^6.4.0",
     "mysql": "github:mysqljs/mysql"
   },
   "devDependencies": {}

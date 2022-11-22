@@ -16,7 +16,7 @@
     "iconv-lite": "^0.4.24",
     "jasmine-core": "^3.2.1",
     "jschardet": "^1.6.0",
-    "karma": "^3.0.0",
+    "karma": "^6.4.1",
     "karma-coverage": "^1.1.2",
     "karma-jasmine": "^1.1.2",
     "karma-phantomjs-launcher": "^1.0.4",

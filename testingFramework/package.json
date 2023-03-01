@@ -15,11 +15,11 @@
   "license": "ISC",
   "devDependencies": {
     "jasmine-core": "^3.2.1",
-    "karma": "^3.0.0",
+    "karma": "^6.4.1",
     "karma-coverage": "^1.1.2",
     "karma-jasmine": "^1.1.2",
     "karma-phantomjs-launcher": "^1.0.4",
-    "mocha": "^5.2.0",
+    "mocha": "^10.2.0",
     "mochawesome": "^3.0.3",
     "phantom": "^6.0.3",
     "puppeteer": "^1.8.0",

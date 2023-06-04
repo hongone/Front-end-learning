@@ -6,10 +6,10 @@
 <img id="tulip" src="拼图.jpg" alt="The Tulip" />
 
 <p>画布：</p>
-<canvas id="myCanvas1" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
+<canvas id="myCanvas1" width="500" height="300" style="border:1px solid #d3d3d3;background:#fd4545;">
 Your browser does not support the HTML5 canvas tag.
 </canvas>
-<canvas id="myCanvas2" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
+<canvas id="myCanvas2" width="500" height="300" style="border:1px solid #d3d3d3;background:#d42323;">
 Your browser does not support the HTML5 canvas tag.
 </canvas>
 <!-- <canvas id="myCanvas3" width="500" height="300" style="border:1px solid #d3d3d3;">
@@ -34,6 +34,13 @@ const L = l + r * 2 + 3 // 滑块实际边长
 
 let x= 40;
 let y=60;
+
+function createCanvas (width, height) {
+  const canvas = document.createElement('canvas')
+  canvas.width = width
+  canvas.height = height
+  return canvas
+}
 function drawPath (ctx, x, y, operation) {
   ctx.beginPath()
   ctx.moveTo(x, y)

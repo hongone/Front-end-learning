@@ -3,7 +3,7 @@
 <body>
 
 <p>要使用的图像：</p>
-<img id="tulip" src="https://www.w3school.com.cn/i/eg_tulip.jpg" alt="The Tulip" />
+<img id="tulip" src="拼图.jpg" alt="The Tulip" />
 
 <p>画布：</p>
 <canvas id="myCanvas1" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
@@ -12,18 +12,28 @@ Your browser does not support the HTML5 canvas tag.
 <canvas id="myCanvas2" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
 Your browser does not support the HTML5 canvas tag.
 </canvas>
-
+<!-- <canvas id="myCanvas3" width="500" height="300" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas> -->
+<br>
 
 <button onclick="drawPaths()">画路径</button>
 <button onclick="fillimg()">填充图片</button>
+参考地址
+<br>
+<a href="https://github.com/yeild/jigsaw/blob/master/src/jigsaw.js">https://github.com/yeild/jigsaw/blob/master/src/jigsaw.js</a>
 <script>
-
+// 参考地址
+//https://github.com/yeild/jigsaw/blob/master/src/jigsaw.js
 const w = 310 // canvas宽度
 const h = 155 // canvas高度
 const l = 42 // 滑块边长
 const r = 9 // 滑块半径
 const PI = Math.PI
 const L = l + r * 2 + 3 // 滑块实际边长
+
+let x= 40;
+let y=60;
 function drawPath (ctx, x, y, operation) {
   ctx.beginPath()
   ctx.moveTo(x, y)
@@ -48,24 +58,41 @@ function clearCanvas(ctx) {
 
 
 function fillimg(){
-	let c1=document.getElementById("myCanvas1");
-	let ctx1=c1.getContext("2d");
-	let img=document.getElementById("tulip");
-	ctx1.drawImage(img,10,10);
-		let c2=document.getElementById("myCanvas2");
-	let ctx2=c2.getContext("2d");
 
-	ctx2.drawImage(img,10,10);
+	let img=document.getElementById("tulip");
+	//img.crossOrigin = '';
+
+
+	let c1=document.getElementById("myCanvas1");
+	//c1.crossOrigin = '';
+	let ctx1=c1.getContext("2d");
+	ctx1.drawImage(img,10,10);
+
+	let c2=document.getElementById("myCanvas2");
+	//c2.crossOrigin = '';
+	let blockCtx=c2.getContext("2d");
+	blockCtx.drawImage(img,10,10);
+
+	    // 提取滑块并放到最左边
+    const new_y = y - r * 2 - 1
+	
+    const ImageData = blockCtx.getImageData(x - 3, new_y, L, L)
+
+    // let block=document.getElementById("myCanvas3");
+    // block.width = L
+    clearCanvas(blockCtx);
+    c2.width = L;
+    blockCtx.putImageData(ImageData, 0, y);
 }
 function drawPaths(){
 	let c1=document.getElementById("myCanvas1");
 	let ctx1=c1.getContext("2d");
 	clearCanvas(ctx1);
-	drawPath(ctx1,40,60,'fill');
+	drawPath(ctx1,x,y,'fill');
 	let c2=document.getElementById("myCanvas2");
 	let ctx2=c2.getContext("2d");
 	clearCanvas(ctx2);
-	drawPath(ctx2,40,60,'clip');
+	drawPath(ctx2,x,y,'clip');
 
 }
 

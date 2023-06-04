@@ -12,7 +12,8 @@
     "server:lint": "cross-env NODE_ENV=lint gulp",
     "docs": "jsdoc ./src/nodeuii/**/*.js -d ./docs/nodeuii",
     "client:prod": "webpack --mode production --module-bind js=babel-loader",
-    "client:dev": "webpack --mode development "
+    "client:dev": "webpack --mode development ",
+    "watch": "onchange -i -k \"dist/*.js\" -- npm run server:start"
   },
   "author": "",
   "license": "ISC",
@@ -60,6 +61,17 @@
     "webpack-build-notifier": "^0.1.30",
     "webpack-cli": "^3.1.2",
     "webpack-merge": "^4.1.4",
-    "yargs-parser": "^11.0.0"
+    "yargs-parser": "^11.0.0",
+    "onchange": "^7.1.0"
+  },
+  "nodemonConfig": {
+    "watch": ["./dist/"],
+    "script": "app.js",
+    "options": {
+      "extensions": ["js"],
+      "exec": "cross-env NODE_ENV=production node"
+    },
+    "ignore": ["dist/views/*", "docs/*"],
+    "delay": "2500"
   }
 }

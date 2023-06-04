@@ -56,7 +56,6 @@ app.use((0, _awilixKoa.scopePerRequest)(container));
 container.loadModules([__dirname + '/services/*.js'], {
   formatName: 'camelCase',
   resolverOption: {
-
     lifetime: _awilix.Lifetime.SCOPED
   }
 });

@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./nodeui/server.js",
-    "dev": "webpack-dev-server  --inline --progress --config config/webpack.client.conf.js",
+    "dev": "webpack-dev-server  --inline --progress --config config/webpack.client.config.js",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "webpack --inline --progress --config config/webpack.client.conf.js",
-    "build:server": "webpack --inline --progress --config config/webpack.server.conf.js"
+    "build:client": "webpack --inline --progress --config config/webpack.client.config.js",
+    "build:server": "webpack --inline --progress --config config/webpack.server.config.js"
   },
   "author": "",
   "license": "ISC",

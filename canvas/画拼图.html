@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>要使用的图像：</p>
+<img id="tulip" src="https://www.w3school.com.cn/i/eg_tulip.jpg" alt="The Tulip" />
+
+<p>画布：</p>
+<canvas id="myCanvas1" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<canvas id="myCanvas2" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+
+<button onclick="drawPaths()">画路径</button>
+<button onclick="fillimg()">填充图片</button>
+<script>
+
+const w = 310 // canvas宽度
+const h = 155 // canvas高度
+const l = 42 // 滑块边长
+const r = 9 // 滑块半径
+const PI = Math.PI
+const L = l + r * 2 + 3 // 滑块实际边长
+function drawPath (ctx, x, y, operation) {
+  ctx.beginPath()
+  ctx.moveTo(x, y)
+  ctx.arc(x + l / 2, y - r + 2, r, 0.72 * PI, 2.26 * PI)
+  ctx.lineTo(x + l, y)
+  ctx.arc(x + l + r - 2, y + l / 2, r, 1.21 * PI, 2.78 * PI)
+  ctx.lineTo(x + l, y + l)
+  ctx.lineTo(x, y + l)
+  ctx.arc(x + r - 2, y + l / 2, r + 0.4, 2.76 * PI, 1.24 * PI, true)
+  ctx.lineTo(x, y)
+  ctx.lineWidth = 2
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)'
+  ctx.stroke()
+  ctx.globalCompositeOperation = 'destination-over'
+  operation === 'fill'? ctx.fill() : ctx.clip()
+}
+function clearCanvas(ctx) {
+	console.log(ctx.canvas.width, ctx.canvas.height);
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+
+function fillimg(){
+	let c1=document.getElementById("myCanvas1");
+	let ctx1=c1.getContext("2d");
+	let img=document.getElementById("tulip");
+	ctx1.drawImage(img,10,10);
+		let c2=document.getElementById("myCanvas2");
+	let ctx2=c2.getContext("2d");
+
+	ctx2.drawImage(img,10,10);
+}
+function drawPaths(){
+	let c1=document.getElementById("myCanvas1");
+	let ctx1=c1.getContext("2d");
+	clearCanvas(ctx1);
+	drawPath(ctx1,40,60,'fill');
+	let c2=document.getElementById("myCanvas2");
+	let ctx2=c2.getContext("2d");
+	clearCanvas(ctx2);
+	drawPath(ctx2,40,60,'clip');
+
+}
+
+</script>
+
+</body>
+</html>

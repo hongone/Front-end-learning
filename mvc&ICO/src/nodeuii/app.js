@@ -9,7 +9,6 @@ import serve from 'koa-static';
 import render from 'koa-swig';
 import co from 'co';
 
-
 log4js.configure({
   appenders: { cheese: { type: 'file', filename: config.logPath + '/error.log' } },
   categories: { default: { appenders: ['cheese'], level: 'error' } }
@@ -33,7 +32,6 @@ app.use(scopePerRequest(container));
 container.loadModules([__dirname +'/services/*.js'],{
   formatName: 'camelCase',
   resolverOption:{
-    
     lifetime : Lifetime.SCOPED
   }
 }

@@ -25,7 +25,7 @@ export default context => {
           return component.asyncData({ store });
         }
       })).then(() => {
-        // 当使用emplate 时，context.state 将作为window.__INITIAL_STATE__ 状态，自动嵌入到最终的 HTML中
+        // 当使用template 时，context.state 将作为window.__INITIAL_STATE__ 状态，自动嵌入到最终的 HTML中
 
         context.state = store.state;
 
